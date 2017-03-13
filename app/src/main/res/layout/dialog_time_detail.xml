@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:sl="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <com.ssomai.android.scalablelayout.ScalableLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        sl:scale_base_height="470"
+        sl:scale_base_width="350">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/time_dialog_01"
+            sl:scale_height="170"
+            sl:scale_width="350" />
+
+        <ImageView
+            android:id="@+id/time_detail_line"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/time_dialog_04"
+            sl:scale_height="18"
+            sl:scale_top="170"
+            sl:scale_width="350" />
+
+        <LinearLayout
+            android:id="@+id/time_detail_items"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            sl:scale_height="150"
+            sl:scale_left="30"
+            sl:scale_top="220"
+            sl:scale_width="290">
+
+        </LinearLayout>
+
+        <ImageView
+            android:id="@+id/time_detail_kakao"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/time_dialog_05"
+            sl:scale_height="41"
+            sl:scale_left="30"
+            sl:scale_top="407"
+            sl:scale_width="135" />
+
+        <ImageView
+            android:id="@+id/time_detail_cancel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/time_dialog_07"
+            sl:scale_height="41"
+            sl:scale_left="185"
+            sl:scale_top="407"
+            sl:scale_width="135" />
+
+
+    </com.ssomai.android.scalablelayout.ScalableLayout>
+
+</FrameLayout>

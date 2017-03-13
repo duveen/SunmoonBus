@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "453743400922",
+    "firebase_url": "https://sunmoonbus-81d3b.firebaseio.com",
+    "project_id": "sunmoonbus-81d3b",
+    "storage_bucket": "sunmoonbus-81d3b.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:453743400922:android:8375b2e702f5e323",
+        "android_client_info": {
+          "package_name": "kr.o3selab.sunmoonbus"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "453743400922-75ggkijrentjl1qt8t9ag1urdh1pia89.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBEcEFk_uaYjqTb0kqOklN7ytopZSHqBao"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

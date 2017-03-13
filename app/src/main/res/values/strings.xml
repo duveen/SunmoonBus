@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<resources>
+
+    <!--광고 관리키-->
+    <string name="admob_ad_id" translatable="false">ca-app-pub-2029925552324818~7417726880</string>
+    <string name="admob_ad_fullsize" translatable="false">ca-app-pub-2029925552324818/8894460081</string>
+
+    <!--카카오 링크 키-->
+    <string name="kakao_app_key" translatable="false">61d3931d877cf1c9ee493a0db8f87f17</string>
+    <string name="kakao_scheme" translatable="false">kakao61d3931d877cf1c9ee493a0db8f87f17</string>
+    <string name="kakaolink_host" translatable="false">kakaolink</string>
+
+    <!--공통-->
+    <string name="app_name">선문대 셔틀버스 시간표</string>
+    <string name="back_button_toast">\'뒤로\' 버튼을 한번 더 누르시면 종료됩니다.</string>
+    <string name="base_64_key" translatable="false">MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAzQdQy75TACzmhczrciaC1FPRpvjA2PrOPIdSZXLAuUrhBuU4/JbZNDCTuAxUOrSI7HVykFBAtOp/kzsLyby/6NmWKA6RDj4gbweb13r6Kvx72VrkAvHFDva5O7rWzV0qObVnwlBmh3RP+RSjGSO5ZlzaBKrMf/hEA5S7bffqDCMYMyy3VS/lRWsivlkdb03BU3suHff0x7YJNw5mUUYQNxMdFxXYy7AUa6b+iDIgB3GAOhzelpsFU8wlN5bB4PNJtq34+bGgn/XddWuvaoU0DPX9KQy7FJXZ7570h/xt4aKdLWNe0EHttSZdwNMrYST7CmmRBTlKt+BoS5IFDj2wowIDAQAB</string>
+
+    <!--로딩 액티비티-->
+    <string name="loading_logo">SM Bus</string>
+    <string name="loading_loading_text">시간표 정보를 불러오고 있습니다. (최초 1회)</string>
+    <string name="loading_show_dataversion_prefix">"이 앱의 시간표 버전은 [ "</string>
+    <string name="loading_show_dataversion_suffix">" ] 입니다."</string>
+    <string name="loading_error_get_holiday_date">방학기간을 불러올 수 없습니다. 직접 설정해주세요.</string>
+
+    <string name="loading_update_alert">알림</string>
+    <string name="loading_update_message_important">새 버전이 출시되었습니다. 중요 업데이트가 포함되어 있으므로 반드시 업데이트 부탁드립니다. 불편을 끼쳐 드려 죄송합니다.</string>
+    <string name="loading_update_positive">업데이트</string>
+    <string name="loading_update_message">새 버전이 출시되었습니다. 업데이트를 원하신다면 업데이트 버튼을 클릭해주세요!</string>
+    <string name="loading_update_negative">취소</string>
+    <string name="loading_receive_error_toast_message">버전 정보 수신에 실패했습니다. 앱을 다시 실행시켜주세요.</string>
+
+    <!--메인 엑티비티-->
+    <string name="main_menu_weekday">평일</string>
+    <string name="main_menu_saturday_noholiday">토요일/공휴일</string>
+    <string name="main_menu_saturday_holiday">토요일/일요일/공휴일</string>
+    <string name="main_menu_sunday">일요일</string>
+    <string name="main_menu_setting">설정</string>
+
+    <string name="main_show_holiday">방학 중 기간이므로, 방학시간표로 표시합니다.</string>
+
+    <!--메인 액티비티 -> 광고 다이얼로그-->
+    <string name="main_ad_alert_title">알림</string>
+    <string name="main_ad_alert_message">광고를 시청해주셔서 감사합니다!\n광고가 싫으시다면 설정에서 광고제거를 구매하실 수 있습니다.</string>
+    <string name="main_ad_alert_yes">구매하기</string>
+    <string name="main_ad_alert_no">안할래요(오늘 광고 안보기)</string>
+
+    <!--지역 이름-->
+    <string name="region_cheonan_asan_station">천안역/아산(KTX)역</string>
+    <string name="region_cheonan_terminal">천안터미널</string>
+    <string name="region_onyang_station_terminal">온양역/터미널</string>
+    <string name="region_cheonan_campus">천안캠퍼스</string>
+    <string name="region_cheonan_to_asan">천안캠퍼스->아산캠퍼스</string>
+    <string name="region_asan_to_cheonan">아산캠퍼스->천안캠퍼스</string>
+
+    <string name="region_depart_asancampus">아산캠퍼스\n(출발)</string>
+    <string name="region_depart_asancampus_without_n">아산캠퍼스 (출발)</string>
+    <string name="region_asan_station">아산역(KTX)</string>
+    <string name="region_cheonan_station">천안역</string>
+    <string name="region_arrive_asancampus">아산캠퍼스\n(도착)</string>
+    <string name="region_arrive_asancampus_without_n">아산캠퍼스 (도착)</string>
+    <string name="region_terminal">터미널</string>
+    <string name="region_baebang">배방지역</string>
+    <string name="region_onyang_station">온양역</string>
+    <string name="region_onyang_terminal">온양터미널</string>
+    <string name="region_depart_cheonancampus">천안캠퍼스\n(출발)</string>
+    <string name="region_depart_cheonancampus_without_n">천안캠퍼스 (출발)</string>
+    <string name="region_cheongsu">청수동</string>
+    <string name="region_sinbang">신방동</string>
+    <string name="region_arrive_cheonancampus">천안캠퍼스\n(도착)</string>
+    <string name="region_arrive_cheonancampus_without_n">천안캠퍼스 (도착)</string>
+
+    <!--설정 액티비티-->
+    <string name="setting_menu_reload_timetable">시간표 다시 불러오기</string>
+    <string name="setting_menu_setting_holiday">방학기간 수동 설정하기</string>
+    <string name="setting_menu_remove_ad">광고 제거하기</string>
+    <string name="setting_menu_kakao">카톡으로 문의하기</string>
+    <string name="setting_menu_about_application">어플리케이션 정보</string>
+
+    <!--설정 액티비티 -> 광고제거 다이얼로그-->
+    <string name="setup_removead_alert_title">알림</string>
+    <string name="setup_removead_alert_message">이미 광고 제거하기를 구매하셨습니다.</string>
+    <string name="setup_removead_alert_button">확인</string>
+    <string name="setup_removead_error_toast_message">설정창을 다시 실행시켜주세요!</string>
+
+    <!--설정 액티비티 -> 시간표 재 설정 다이얼로그-->
+    <string name="setup_reloadtime_alert_title">알림</string>
+    <string name="setup_reloadtime_alert_message">시간표를 다시 설정할 때 수동으로 방학기간을 설정했다면, 설정 내용이 삭제 됩니다. 시간표를 다시 불러오시겠습니까?</string>
+    <string name="setup_reloadtime_alert_yes">네</string>
+    <string name="setup_reloadtime_alert_no">아니오</string>
+    <string name="setup_reloadtime_toast_message">데이터 수신을 위해 어플을 다시 실행 시켜주세요!</string>
+
+    <!--설정 액티비티 -> 방학시간 설정-->
+    <string name="setting_vacation_start_date">시작날짜</string>
+    <string name="setting_vacation_end_date">종료날짜</string>
+    <string name="setting_vacation_title">설정</string>
+    <string name="setting_vacation_positive">확인</string>
+    <string name="setting_vacation_ok_toast">어플을 재시작해야 적용이 완료됩니다.</string>
+    <string name="setting_vacation_error_toast_start">에러: 방학 종료기간 보다 미래의 날짜를 선택했습니다.</string>
+    <string name="setting_vacation_error_toast_end">에러: 방학 시작기간 보다 과거의 날짜를 선택했습니다.</string>
+
+    <!--정보 액티비티-->
+    <string name="info_application_version">어플리케이션 버전 : </string>
+    <string name="info_timetable_version">셔틀시간표 버전 : </string>
+    <string name="info_vacation_period">방학기간 : </string>
+    <string name="info_introduce">안내\n이 어플리케이션은 학교측에서 제작한 어플이 아니라 개인이 제작한 어플이므로 문의는 설정창의 문의하기 버튼을 클릭해서 문의 해주세요. 감사합니다.\n광고 제거는 개발자가 더욱 개발에 집중할 수 있는 원동력입니다. ^^\n\n어플리케이션 개발자 : 컴퓨터공학과 박민규(duveen@duveen.me)\n디자이너 : 시각디자인학과 김다해(ok_tina@naver.com)</string>
+    <string name="info_copyright">© O3SE Lab. All Right Reserved.</string>
+
+    <!--카카오링크 메시지-->
+    <string name="kakaolink_message_title">[선문대 셔틀버스 시간표 알림]</string>
+    <string name="kakaolink_app_button">앱에서 자세히 보기</string>
+
+</resources>
