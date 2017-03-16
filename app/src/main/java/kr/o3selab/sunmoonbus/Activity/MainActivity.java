@@ -55,22 +55,54 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        // Setting Default Data
         Constants.printLog(1, "Start MainActivity", null);
 
         Constants.activity = this;
         Constants.context = this;
 
-        APP_ID = getString(R.string.admob_ad_id);
+        // Creating The Toolbar and setting it as the Toolbar for the activity
+        mToolbar = (Toolbar) findViewById(R.id.main_toolbar);
+        setSupportActionBar(mToolbar);
 
+        // Handling Holiday
         isHoliday = getIntent().getBooleanExtra("isHoliday", false);
         if (isHoliday) Toast.makeText(this, R.string.main_show_holiday, Toast.LENGTH_SHORT).show();
 
         isLoaded = true;
 
-        // Creating The Toolbar and setting it as the Toolbar for the activity
-        mToolbar = (Toolbar) findViewById(R.id.main_toolbar);
-        setSupportActionBar(mToolbar);
+        // Handling BackpressedButton
+        mBackPressed = new BackPressed(this);
 
+        // Handling Admob AD
+        APP_ID = getString(R.string.admob_ad_id);
+
+        boolean isSkip = compareDate(Constants.getSharedPreferences().getLong(Constants.AD_ALERT_SKIP, 0L));
+        if (!Constants.isRemoveAd && !Constants.isFreeUser && isSkip) {
+
+            Constants.printLog(1, "Initialize Add", null);
+            MobileAds.initialize(this, APP_ID);
+
+            // Admob Ad
+            mInterstitialAd = new InterstitialAd(this);
+            mInterstitialAd.setAdUnitId(getString(R.string.admob_ad_fullsize));
+            requestNewInterstitial();
+            mInterstitialAd.setAdListener(new AdListener() {
+                @Override
+                public void onAdClosed() {
+                    showRemoveAdAlert();
+                }
+            });
+
+            mShowAdThread = new ShowAdThread();
+            mShowAdThread.start();
+        }
+
+        // Handling Notice
+        
+    }
+
+    private void initalization() {
         String[] weekDay = { "일요일", "월요일", "화요일", "수요일", "목요일", "금요일", "토요일" };
 
         Calendar cal = Calendar.getInstance();
@@ -94,31 +126,6 @@ public class MainActivity extends AppCompatActivity {
                 setWeekendDataWithHoliday();
             else
                 setWeekdayDataWithHoliday();
-        }
-
-        // Handling BackpressedButton
-        mBackPressed = new BackPressed(this);
-
-        boolean isSkip = compareDate(Constants.getSharedPreferences().getLong(Constants.AD_ALERT_SKIP, 0L));
-
-        if (!Constants.isRemoveAd && !Constants.isFreeUser && isSkip) {
-
-            Constants.printLog(1, "Initialize Add", null);
-            MobileAds.initialize(this, APP_ID);
-
-            // Admob Ad
-            mInterstitialAd = new InterstitialAd(this);
-            mInterstitialAd.setAdUnitId(getString(R.string.admob_ad_fullsize));
-            requestNewInterstitial();
-            mInterstitialAd.setAdListener(new AdListener() {
-                @Override
-                public void onAdClosed() {
-                    showRemoveAdAlert();
-                }
-            });
-
-            mShowAdThread = new ShowAdThread();
-            mShowAdThread.start();
         }
     }
 
