@@ -23,11 +23,13 @@
     <string name="loading_show_dataversion_suffix">" ] 입니다."</string>
     <string name="loading_error_get_holiday_date">방학기간을 불러올 수 없습니다. 직접 설정해주세요.</string>
 
+    <!--로딩 액티비티 -> 업데이트 알림-->
     <string name="loading_update_alert">알림</string>
-    <string name="loading_update_message_important">새 버전이 출시되었습니다. 중요 업데이트가 포함되어 있으므로 반드시 업데이트 부탁드립니다. 불편을 끼쳐 드려 죄송합니다.</string>
+    <string name="loading_update_message_important">새 버전이 출시되었습니다. 중요 업데이트가 포함되어 있으므로 반드시 업데이트 부탁드립니다. 불편을 끼쳐 드려 죄송합니다.\n\n[업데이트 내용]\n</string>
     <string name="loading_update_positive">업데이트</string>
-    <string name="loading_update_message">새 버전이 출시되었습니다. 업데이트를 원하신다면 업데이트 버튼을 클릭해주세요!</string>
-    <string name="loading_update_negative">취소</string>
+    <string name="loading_update_message">새 버전이 출시되었습니다. 업데이트를 원하신다면 업데이트 버튼을 클릭해주세요!\n\n[업데이트 내용]\n</string>
+    <string name="loading_update_negative_exit">종료</string>
+    <string name="loading_update_negative_cancel">취소</string>
     <string name="loading_receive_error_toast_message">버전 정보 수신에 실패했습니다. 앱을 다시 실행시켜주세요.</string>
 
     <!--메인 엑티비티-->
@@ -39,11 +41,23 @@
 
     <string name="main_show_holiday">방학 중 기간이므로, 방학시간표로 표시합니다.</string>
 
+    <!--메인 액티비티 -> 공지사항-->
+    <string name="main_notice_move">이동</string>
+    <string name="main_notice_ok">확인</string>
+    <string name="main_notice_cancel">취소</string>
+
     <!--메인 액티비티 -> 광고 다이얼로그-->
     <string name="main_ad_alert_title">알림</string>
     <string name="main_ad_alert_message">광고를 시청해주셔서 감사합니다!\n광고가 싫으시다면 설정에서 광고제거를 구매하실 수 있습니다.</string>
     <string name="main_ad_alert_yes">구매하기</string>
     <string name="main_ad_alert_no">안할래요(오늘 광고 안보기)</string>
+
+    <!--메인 액티비티 -> 스낵바 메시지-->
+    <string name="main_snackbar_weekday">평일 시간표로 표시합니다.</string>
+    <string name="main_snackbar_saturday">토요일/공휴일 시간표로 표시합니다.</string>
+    <string name="main_snackbar_sunday">일요일 시간표로 표시합니다.</string>
+    <string name="main_snackbar_weekend">토요일/공휴일/일요일 시간표로 표시합니다.</string>
+    <string name="main_snackbar_ok">확인</string>
 
     <!--지역 이름-->
     <string name="region_cheonan_asan_station">천안역/아산(KTX)역</string>

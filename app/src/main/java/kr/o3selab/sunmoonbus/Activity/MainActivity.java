@@ -3,6 +3,7 @@ package kr.o3selab.sunmoonbus.Activity;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
 import android.support.v4.view.ViewPager;
@@ -11,14 +12,23 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.Toast;
 
 import com.google.android.gms.ads.AdListener;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.InterstitialAd;
 import com.google.android.gms.ads.MobileAds;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
 
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.HashMap;
 
 import kr.o3selab.sunmoonbus.Constant.Constants;
 import kr.o3selab.sunmoonbus.Model.BackPressed;
@@ -33,12 +43,9 @@ public class MainActivity extends AppCompatActivity {
     static final int MENU_SUNDAY = MENU_WEEKDAY + 2;
     static final int MENU_WEEKEND = MENU_WEEKDAY + 3;
     static final int MENU_SETUP = MENU_WEEKDAY + 4;
-
+    public static String APP_ID;
     boolean isHoliday;
     boolean isLoaded;
-
-    public static String APP_ID;
-
     Toolbar mToolbar;
     ViewPager mViewPager;
     ViewPagerAdapter mViewPagerAdapter;
@@ -49,6 +56,50 @@ public class MainActivity extends AppCompatActivity {
 
     InterstitialAd mInterstitialAd;
     ShowAdThread mShowAdThread;
+    ValueEventListener noticeEventListener = new ValueEventListener() {
+        @Override
+        public void onDataChange(DataSnapshot dataSnapshot) {
+            ArrayList<HashMap> noticeList = (ArrayList<HashMap>) dataSnapshot.getValue();
+            if (noticeList != null) {
+                for (HashMap map : noticeList) {
+                    String title = (String) map.get("title");
+                    String body = (String) map.get("body");
+                    Boolean isLink = (Boolean) map.get("isLink");
+
+                    AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this)
+                            .setTitle(title)
+                            .setMessage(body)
+                            .setCancelable(true);
+
+                    if (isLink) {
+                        final String link = (String) map.get("link");
+                        builder.setPositiveButton(R.string.main_notice_move, new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                                startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(link)));
+                            }
+                        });
+                        builder.setPositiveButton(R.string.main_notice_cancel, null);
+                    } else {
+                        builder.setPositiveButton(R.string.main_notice_ok, null);
+                    }
+
+                    builder.show();
+                }
+            }
+        }
+
+        @Override
+        public void onCancelled(DatabaseError databaseError) {
+
+        }
+    };
+    View.OnClickListener snackBarListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View view) {
+
+        }
+    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -98,15 +149,21 @@ public class MainActivity extends AppCompatActivity {
             mShowAdThread.start();
         }
 
+        // inital UI
+        initalization();
+
         // Handling Notice
-        
+        DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference();
+        Query query = databaseReference.child("notice");
+
+        query.addListenerForSingleValueEvent(noticeEventListener);
     }
 
     private void initalization() {
-        String[] weekDay = { "일요일", "월요일", "화요일", "수요일", "목요일", "금요일", "토요일" };
+        String[] weekDay = {"일요일", "월요일", "화요일", "수요일", "목요일", "금요일", "토요일"};
 
         Calendar cal = Calendar.getInstance();
-        int num = cal.get(Calendar.DAY_OF_WEEK)-1;
+        int num = cal.get(Calendar.DAY_OF_WEEK) - 1;
         String today = weekDay[num];
 
         if (!isHoliday) {
@@ -122,43 +179,10 @@ public class MainActivity extends AppCompatActivity {
                     break;
             }
         } else {
-            if(today.equals("토요일") || today.equals("일요일"))
+            if (today.equals("토요일") || today.equals("일요일"))
                 setWeekendDataWithHoliday();
             else
                 setWeekdayDataWithHoliday();
-        }
-    }
-
-    private class ShowAdThread extends Thread {
-        @Override
-        public void run() {
-            try {
-                Thread.sleep(5000);
-            } catch (InterruptedException e) {
-                return;
-            }
-
-            while (true) {
-                if (isLoaded) {
-                    runOnUiThread(new Runnable() {
-                        @Override
-                        public void run() {
-                            if (mInterstitialAd.isLoaded()) {
-                                isLoaded = false;
-                                mInterstitialAd.show();
-                            }
-                        }
-                    });
-                }
-
-                if (!isLoaded) break;
-
-                try {
-                    Thread.sleep(1000);
-                } catch (InterruptedException e) {
-                    return;
-                }
-            }
         }
     }
 
@@ -220,7 +244,7 @@ public class MainActivity extends AppCompatActivity {
         mViewPagerAdapter = new ViewPagerAdapter(getSupportFragmentManager(), Constants.tabTitles, numbOfTabs, Constants.WEEKDAY_NOHOLIDAY);
         setUI();
 
-        Snackbar.make(getWindow().getDecorView().getRootView(), "평일 시간표로 표시합니다.", 3000).show();
+        Snackbar.make(getWindow().getDecorView().getRootView(), getString(R.string.main_snackbar_weekday), 3000).setAction(R.string.main_snackbar_ok, snackBarListener).show();
     }
 
     public void setSaturdayDataWithoutHoliday() {
@@ -229,7 +253,7 @@ public class MainActivity extends AppCompatActivity {
         mViewPagerAdapter = new ViewPagerAdapter(getSupportFragmentManager(), Constants.tabTitles, numbOfTabs, Constants.SATURDAY_NOHOLIDAY);
         setUI();
 
-        Snackbar.make(getWindow().getDecorView().getRootView(), "토요일/공휴일 시간표로 표시합니다.", 3000).show();
+        Snackbar.make(getWindow().getDecorView().getRootView(), getString(R.string.main_snackbar_saturday), 3000).setAction(R.string.main_snackbar_ok, snackBarListener).show();
     }
 
     public void setSundayDataWithoutHoliday() {
@@ -238,7 +262,7 @@ public class MainActivity extends AppCompatActivity {
         mViewPagerAdapter = new ViewPagerAdapter(getSupportFragmentManager(), Constants.tabTitles, numbOfTabs, Constants.SUNDAY_NOHOLIDAY);
         setUI();
 
-        Snackbar.make(getWindow().getDecorView().getRootView(), "일요일 시간표로 표시합니다.", 3000).show();
+        Snackbar.make(getWindow().getDecorView().getRootView(), getString(R.string.main_snackbar_sunday), 3000).setAction(R.string.main_snackbar_ok, snackBarListener).show();
     }
 
     public void setWeekdayDataWithHoliday() {
@@ -247,7 +271,7 @@ public class MainActivity extends AppCompatActivity {
         mViewPagerAdapter = new ViewPagerAdapter(getSupportFragmentManager(), Constants.tabTitles, numbOfTabs, Constants.WEEKDAY_HOLIDAY);
         setUI();
 
-        Snackbar.make(getWindow().getDecorView().getRootView(), "평일 시간표로 표시합니다.", 3000).show();
+        Snackbar.make(getWindow().getDecorView().getRootView(), getString(R.string.main_snackbar_weekday), 3000).setAction(R.string.main_snackbar_ok, snackBarListener).show();
     }
 
     public void setWeekendDataWithHoliday() {
@@ -256,7 +280,7 @@ public class MainActivity extends AppCompatActivity {
         mViewPagerAdapter = new ViewPagerAdapter(getSupportFragmentManager(), Constants.tabTitles, numbOfTabs, Constants.WEEKEND_HOLIDAY);
         setUI();
 
-        Snackbar.make(getWindow().getDecorView().getRootView(), "토요일/공휴일/일요일 시간표로 표시합니다.", 3000).show();
+        Snackbar.make(getWindow().getDecorView().getRootView(), getString(R.string.main_snackbar_weekend), 3000).setAction(R.string.main_snackbar_ok, snackBarListener).show();
     }
 
     public void setUI() {
@@ -334,5 +358,38 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         mBackPressed.onBackPressed();
+    }
+
+    private class ShowAdThread extends Thread {
+        @Override
+        public void run() {
+            try {
+                Thread.sleep(3000);
+            } catch (InterruptedException e) {
+                return;
+            }
+
+            while (true) {
+                if (isLoaded) {
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            if (mInterstitialAd.isLoaded()) {
+                                isLoaded = false;
+                                mInterstitialAd.show();
+                            }
+                        }
+                    });
+                }
+
+                if (!isLoaded) break;
+
+                try {
+                    Thread.sleep(1000);
+                } catch (InterruptedException e) {
+                    return;
+                }
+            }
+        }
     }
 }
