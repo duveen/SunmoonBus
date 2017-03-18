@@ -22,6 +22,7 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.StringTokenizer;
 
 import kr.o3selab.sunmoonbus.Activity.MainActivity;
@@ -100,9 +101,11 @@ public class LoadingActivity extends AppCompatActivity {
                 @Override
                 public void onDataChange(DataSnapshot dataSnapshot) {
 
-                    StringTokenizer str = new StringTokenizer(dataSnapshot.getValue().toString(), " ");
-                    Double releasedVersion = Double.parseDouble(str.nextToken());
-                    String isImportant = str.nextToken();
+                    HashMap map = (HashMap) dataSnapshot.getValue();
+
+                    Double releasedVersion = Double.parseDouble(map.get("version_info").toString());
+                    Boolean isImportant = (Boolean) map.get("isImportant");
+                    String updateContent = (String) map.get("update_content");
 
                     Constants.printLog(1, "AppVersion : " + Constants.appVersion + ", releasedVersion : " + releasedVersion, null);
                     Constants.printLog(1, "isImportantUpdate : " + isImportant, null);
@@ -110,10 +113,10 @@ public class LoadingActivity extends AppCompatActivity {
                     if (Constants.appVersion == releasedVersion) {
                         initalization();
                     } else {
-                        if (isImportant.equals("TRUE")) {
+                        if (isImportant) {
                             new AlertDialog.Builder(LoadingActivity.this)
                                     .setTitle(R.string.loading_update_alert)
-                                    .setMessage(R.string.loading_update_message_important)
+                                    .setMessage(getString(R.string.loading_update_message_important) + updateContent)
                                     .setPositiveButton(R.string.loading_update_positive, new DialogInterface.OnClickListener() {
                                         @Override
                                         public void onClick(DialogInterface dialogInterface, int i) {
@@ -121,6 +124,12 @@ public class LoadingActivity extends AppCompatActivity {
                                             intent.setData(Uri.parse("market://details?id=" + getPackageName()));
                                             startActivity(intent);
 
+                                            LoadingActivity.this.finish();
+                                        }
+                                    })
+                                    .setNegativeButton(R.string.loading_update_negative_exit, new DialogInterface.OnClickListener() {
+                                        @Override
+                                        public void onClick(DialogInterface dialogInterface, int i) {
                                             LoadingActivity.this.finish();
                                         }
                                     })
@@ -129,7 +138,7 @@ public class LoadingActivity extends AppCompatActivity {
                         } else {
                             new AlertDialog.Builder(LoadingActivity.this)
                                     .setTitle(R.string.loading_update_alert)
-                                    .setMessage(R.string.loading_update_message)
+                                    .setMessage(getString(R.string.loading_update_message) + updateContent)
                                     .setPositiveButton(R.string.loading_update_positive, new DialogInterface.OnClickListener() {
                                         @Override
                                         public void onClick(DialogInterface dialogInterface, int i) {
@@ -140,7 +149,7 @@ public class LoadingActivity extends AppCompatActivity {
                                             LoadingActivity.this.finish();
                                         }
                                     })
-                                    .setNegativeButton(R.string.loading_update_negative, new DialogInterface.OnClickListener() {
+                                    .setNegativeButton(R.string.loading_update_negative_cancel, new DialogInterface.OnClickListener() {
                                         @Override
                                         public void onClick(DialogInterface dialogInterface, int i) {
                                             initalization();
