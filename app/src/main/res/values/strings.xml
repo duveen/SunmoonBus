@@ -14,7 +14,7 @@
     <!--공통-->
     <string name="app_name">선문대 셔틀버스 시간표</string>
     <string name="back_button_toast">\'뒤로\' 버튼을 한번 더 누르시면 종료됩니다.</string>
-    <string name="base_64_key" translatable="false">MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAzQdQy75TACzmhczrciaC1FPRpvjA2PrOPIdSZXLAuUrhBuU4/JbZNDCTuAxUOrSI7HVykFBAtOp/kzsLyby/6NmWKA6RDj4gbweb13r6Kvx72VrkAvHFDva5O7rWzV0qObVnwlBmh3RP+RSjGSO5ZlzaBKrMf/hEA5S7bffqDCMYMyy3VS/lRWsivlkdb03BU3suHff0x7YJNw5mUUYQNxMdFxXYy7AUa6b+iDIgB3GAOhzelpsFU8wlN5bB4PNJtq34+bGgn/XddWuvaoU0DPX9KQy7FJXZ7570h/xt4aKdLWNe0EHttSZdwNMrYST7CmmRBTlKt+BoS5IFDj2wowIDAQAB</string>
+    <string name="base_64_key" translatable="false">MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEApqCpq4TcjocO3GrvK8bpc6FmPFdL0iOoxK3zk+lmk869aS56M+0udwkXcvV2arv0Zlhk2u83dA4EaLgu8r51ETjC2oizcZZoYQFc08VXFdxrqnhpfVo/4fToE6cuAAKLxaDmzFrtzUJjEYZzjFp21rA1uNggWd2ndBgB1ffcIOtvKSRXLUrD7fFe1sP9fh0eswGrsBdX/aGmIkQhyIRIKPCFAPRUDqGYMlCYWaTxBg0hUo+kSsDUvOGEUeuSEBwDbubvfeovhgatpUh1B7bkv5YdiUHa9yTlmuEnlkXFMsSfMlgHjpFJCg1G6h0qfKdPdu/RB/xdAtdbH35NcAkvNwIDAQAB</string>
 
     <!--로딩 액티비티-->
     <string name="loading_logo">SM Bus</string>
