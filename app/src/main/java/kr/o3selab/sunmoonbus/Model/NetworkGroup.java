@@ -1,9 +1,5 @@
 package kr.o3selab.sunmoonbus.Model;
 
-/**
- * Created by duveen on 2017-02-09.
- */
-
 public class NetworkGroup {
 
     private String url;

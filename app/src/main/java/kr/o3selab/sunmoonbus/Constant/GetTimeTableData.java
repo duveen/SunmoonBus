@@ -9,8 +9,8 @@ import kr.o3selab.sunmoonbus.Model.TimeTableData;
 
 public class GetTimeTableData implements Runnable {
 
-    DBManager mDBManager;
-    LoadingActivity activity;
+    private DBManager mDBManager;
+    private LoadingActivity activity;
 
     public GetTimeTableData(LoadingActivity activity) {
         mDBManager = Constants.mDBManager;

@@ -5,10 +5,6 @@ import android.widget.Toast;
 
 import kr.o3selab.sunmoonbus.R;
 
-/**
- * Created by duveen on 2017-02-06.
- */
-
 public class BackPressed {
 
     private long backKeyPressedTime = 0;

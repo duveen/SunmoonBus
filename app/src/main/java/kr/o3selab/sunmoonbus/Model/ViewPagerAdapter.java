@@ -10,15 +10,11 @@ import kr.o3selab.sunmoonbus.Fragment.Tab2;
 import kr.o3selab.sunmoonbus.Fragment.Tab3;
 import kr.o3selab.sunmoonbus.Fragment.Tab4;
 
-/**
- * Created by duveen on 2017-02-06.
- */
-
 public class ViewPagerAdapter extends FragmentStatePagerAdapter {
 
-    CharSequence Titles[]; // This will Store the Titles of the Tabs which are Going to be passed when ViewPagerAdapter is created
-    int NumbOfTabs; // Store the number of tabs, this will also be passed when the ViewPagerAdapter is created
-    int type;
+    private CharSequence Titles[]; // This will Store the Titles of the Tabs which are Going to be passed when ViewPagerAdapter is created
+    private int NumbOfTabs; // Store the number of tabs, this will also be passed when the ViewPagerAdapter is created
+    private int type;
 
     // Build a Constructor and assign the passed Values to appropriate values in the class
     public ViewPagerAdapter(FragmentManager fm, CharSequence mTitles[], int mNumbOfTabsumb, int type) {

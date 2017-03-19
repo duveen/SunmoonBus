@@ -23,7 +23,6 @@ import com.google.firebase.database.ValueEventListener;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
-import java.util.StringTokenizer;
 
 import kr.o3selab.sunmoonbus.Activity.MainActivity;
 import kr.o3selab.sunmoonbus.Constant.API;
@@ -34,10 +33,10 @@ import kr.o3selab.sunmoonbus.Model.DBManager;
 
 public class LoadingActivity extends AppCompatActivity {
 
-    private DBManager mDBManager;
     public int timeTableStatus;
     public int holidayStatus;
     public boolean isHoliday;
+    private DBManager mDBManager;
     private RoundCornerProgressBar pBar;
 
     @Override

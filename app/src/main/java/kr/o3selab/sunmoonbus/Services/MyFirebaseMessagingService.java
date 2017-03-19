@@ -15,10 +15,6 @@ import kr.o3selab.sunmoonbus.Constant.Constants;
 import kr.o3selab.sunmoonbus.LoadingActivity;
 import kr.o3selab.sunmoonbus.R;
 
-/**
- * Created by mingyupark on 2017. 3. 12..
- */
-
 public class MyFirebaseMessagingService extends FirebaseMessagingService {
 
     private static final String TAG = "[MyFirebaseMessagingService]";

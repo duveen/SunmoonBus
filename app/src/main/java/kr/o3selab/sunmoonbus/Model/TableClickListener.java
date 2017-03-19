@@ -94,7 +94,7 @@ public class TableClickListener implements View.OnClickListener {
         dialog.show();
     }
 
-    String[] getItemsUsingTitle(String location) {
+    private String[] getItemsUsingTitle(String location) {
 
         String[] items = new String[mItemCount];
 

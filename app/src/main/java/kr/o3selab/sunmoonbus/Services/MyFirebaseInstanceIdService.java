@@ -5,10 +5,6 @@ import com.google.firebase.iid.FirebaseInstanceIdService;
 
 import kr.o3selab.sunmoonbus.Constant.Constants;
 
-/**
- * Created by mingyupark on 2017. 3. 12..
- */
-
 public class MyFirebaseInstanceIdService extends FirebaseInstanceIdService {
 
     public static final String TAG = "[MyFirebaseInstanceIdService]";

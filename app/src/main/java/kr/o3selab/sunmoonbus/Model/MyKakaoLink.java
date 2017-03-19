@@ -10,9 +10,9 @@ import com.kakao.util.KakaoParameterException;
 import kr.o3selab.sunmoonbus.Constant.Constants;
 import kr.o3selab.sunmoonbus.R;
 
-public class MyKakaoLink extends KakaoLink {
+class MyKakaoLink extends KakaoLink {
 
-    public static void sendKakaoMessage(String location, String... args) {
+    static void sendKakaoMessage(String location, String... args) {
         try {
             final KakaoLink kakaoLink = KakaoLink.getKakaoLink(Constants.context);
             final KakaoTalkLinkMessageBuilder kakaoTalkLinkMessageBuilder = kakaoLink.createKakaoTalkLinkMessageBuilder();
@@ -31,8 +31,6 @@ public class MyKakaoLink extends KakaoLink {
             kakaoTalkLinkMessageBuilder.addAppButton(Constants.context.getString(R.string.kakaolink_app_button), getAppAction("2.0"));
 
             kakaoLink.sendMessage(kakaoTalkLinkMessageBuilder, Constants.context);
-        } catch (KakaoParameterException kakaoParameterException) {
-            Constants.printLog(2, null, kakaoParameterException);
         } catch (Exception exception) {
             Constants.printLog(2, null, exception);
         }

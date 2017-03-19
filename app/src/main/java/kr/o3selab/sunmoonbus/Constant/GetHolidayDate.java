@@ -15,7 +15,7 @@ import kr.o3selab.sunmoonbus.R;
 
 public class GetHolidayDate implements Runnable {
 
-    LoadingActivity activity;
+    private LoadingActivity activity;
 
     public GetHolidayDate(LoadingActivity activity) {
         this.activity = activity;

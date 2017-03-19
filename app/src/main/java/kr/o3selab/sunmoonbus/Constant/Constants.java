@@ -17,21 +17,6 @@ import kr.o3selab.sunmoonbus.Model.DBManager;
 
 public class Constants {
 
-    // 어플리케이션 정보
-    public static Activity activity;
-    public static Context context;
-    public static DBManager mDBManager;
-    public static CharSequence tabTitles[];
-
-    // 버전정보
-    public static double appVersion = 2.0;
-    public static long timeTableVersion;
-    public static long vacationPeriodStart;
-    public static long vacationPeriodEnd;
-
-    // 개인 식별 정보
-    public static String deviceID;
-
     // 요일/휴일 타입
     public static final int HOLIDAY = 10;
     public static final int NOHOLIDAY = 20;
@@ -41,15 +26,31 @@ public class Constants {
     public static final int SUNDAY_NOHOLIDAY = 3;
     public static final int WEEKDAY_HOLIDAY = 4;
     public static final int WEEKEND_HOLIDAY = 5;
-
-    // 설정정보
-    public static String MY_SHARED_PREF = "my_shared";
     public static final String HOLIDAY_PERIOD_START = "holiday_start";
     public static final String HOLIDAY_PERIOD_END = "holiday_end";
-
     public static final String AD_ALERT_SKIP = "ad_alert_skip";
     public static final String REMOVE_AD = "remove_ad";
     public static final String FREE_USER = "free_user";
+    private static final SimpleDateFormat sdf = new SimpleDateFormat("MM-dd HH:mm:ss");
+    // 어플리케이션 정보
+    public static Activity activity;
+    public static Context context;
+    public static DBManager mDBManager;
+    public static CharSequence tabTitles[];
+    // 버전정보
+    public static double appVersion = 2.0;
+    public static long timeTableVersion;
+    public static long vacationPeriodStart;
+    public static long vacationPeriodEnd;
+    // 개인 식별 정보
+    public static String deviceID;
+    // 광고 정보
+    public static boolean isRemoveAd = false;
+    public static boolean isFreeUser = false;
+    // 에러 리포팅
+    public static StringBuilder logs;
+    // 설정정보
+    private static String MY_SHARED_PREF = "my_shared";
 
     public static SharedPreferences getSharedPreferences() {
         return context.getSharedPreferences(MY_SHARED_PREF, Context.MODE_PRIVATE);
@@ -58,14 +59,6 @@ public class Constants {
     public static SharedPreferences.Editor getEditor() {
         return getSharedPreferences().edit();
     }
-
-    // 광고 정보
-    public static boolean isRemoveAd = false;
-    public static boolean isFreeUser = false;
-
-    // 에러 리포팅
-    public static StringBuilder logs;
-    private static final SimpleDateFormat sdf = new SimpleDateFormat("MM-dd HH:mm:ss");
 
     public static void printLog(int type, @Nullable String msg, @Nullable Exception e) {
         StringBuilder log = new StringBuilder();

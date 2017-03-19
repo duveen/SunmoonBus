@@ -2,10 +2,6 @@ package kr.o3selab.sunmoonbus.Model;
 
 import java.util.Vector;
 
-/**
- * Created by duveen on 2017-02-09.
- */
-
 public class TimeTableData {
 
     private int status;
