@@ -3,6 +3,7 @@ package kr.o3selab.sunmoonbus.Activity;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
@@ -244,7 +245,7 @@ public class MainActivity extends AppCompatActivity {
         mViewPagerAdapter = new ViewPagerAdapter(getSupportFragmentManager(), Constants.tabTitles, numbOfTabs, Constants.WEEKDAY_NOHOLIDAY);
         setUI();
 
-        Snackbar.make(getWindow().getDecorView().getRootView(), getString(R.string.main_snackbar_weekday), 3000).setAction(R.string.main_snackbar_ok, snackBarListener).show();
+        Snackbar.make(getWindow().getDecorView().getRootView(), getString(R.string.main_snackbar_weekday), 3000).setAction(R.string.main_snackbar_ok, snackBarListener).setActionTextColor(Color.rgb(56, 142, 60)).show();
     }
 
     public void setSaturdayDataWithoutHoliday() {
@@ -253,7 +254,7 @@ public class MainActivity extends AppCompatActivity {
         mViewPagerAdapter = new ViewPagerAdapter(getSupportFragmentManager(), Constants.tabTitles, numbOfTabs, Constants.SATURDAY_NOHOLIDAY);
         setUI();
 
-        Snackbar.make(getWindow().getDecorView().getRootView(), getString(R.string.main_snackbar_saturday), 3000).setAction(R.string.main_snackbar_ok, snackBarListener).show();
+        Snackbar.make(getWindow().getDecorView().getRootView(), getString(R.string.main_snackbar_saturday), 3000).setAction(R.string.main_snackbar_ok, snackBarListener).setActionTextColor(Color.rgb(56, 142, 60)).show();
     }
 
     public void setSundayDataWithoutHoliday() {
@@ -262,7 +263,7 @@ public class MainActivity extends AppCompatActivity {
         mViewPagerAdapter = new ViewPagerAdapter(getSupportFragmentManager(), Constants.tabTitles, numbOfTabs, Constants.SUNDAY_NOHOLIDAY);
         setUI();
 
-        Snackbar.make(getWindow().getDecorView().getRootView(), getString(R.string.main_snackbar_sunday), 3000).setAction(R.string.main_snackbar_ok, snackBarListener).show();
+        Snackbar.make(getWindow().getDecorView().getRootView(), getString(R.string.main_snackbar_sunday), 3000).setAction(R.string.main_snackbar_ok, snackBarListener).setActionTextColor(Color.rgb(56, 142, 60)).show();
     }
 
     public void setWeekdayDataWithHoliday() {
@@ -271,7 +272,7 @@ public class MainActivity extends AppCompatActivity {
         mViewPagerAdapter = new ViewPagerAdapter(getSupportFragmentManager(), Constants.tabTitles, numbOfTabs, Constants.WEEKDAY_HOLIDAY);
         setUI();
 
-        Snackbar.make(getWindow().getDecorView().getRootView(), getString(R.string.main_snackbar_weekday), 3000).setAction(R.string.main_snackbar_ok, snackBarListener).show();
+        Snackbar.make(getWindow().getDecorView().getRootView(), getString(R.string.main_snackbar_weekday), 3000).setAction(R.string.main_snackbar_ok, snackBarListener).setActionTextColor(Color.rgb(56, 142, 60)).show();
     }
 
     public void setWeekendDataWithHoliday() {
@@ -280,7 +281,7 @@ public class MainActivity extends AppCompatActivity {
         mViewPagerAdapter = new ViewPagerAdapter(getSupportFragmentManager(), Constants.tabTitles, numbOfTabs, Constants.WEEKEND_HOLIDAY);
         setUI();
 
-        Snackbar.make(getWindow().getDecorView().getRootView(), getString(R.string.main_snackbar_weekend), 3000).setAction(R.string.main_snackbar_ok, snackBarListener).show();
+        Snackbar.make(getWindow().getDecorView().getRootView(), getString(R.string.main_snackbar_weekend), 3000).setAction(R.string.main_snackbar_ok, snackBarListener).setActionTextColor(Color.rgb(56, 142, 60)).show();
     }
 
     public void setUI() {
