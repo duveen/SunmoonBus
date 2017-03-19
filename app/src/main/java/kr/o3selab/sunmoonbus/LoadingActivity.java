@@ -33,10 +33,10 @@ import kr.o3selab.sunmoonbus.Model.DBManager;
 
 public class LoadingActivity extends AppCompatActivity {
 
+    private DBManager mDBManager;
     public int timeTableStatus;
     public int holidayStatus;
     public boolean isHoliday;
-    private DBManager mDBManager;
     private RoundCornerProgressBar pBar;
 
     @Override
