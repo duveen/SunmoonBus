@@ -1,7 +1,5 @@
-<?xml version="1.0"encoding="utf-8"?>
-
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
-
     <string name="app_name">鮮文大学のシャトルバスの時刻表</string>
     <string name="back_button_toast">\'後に\'ボタンをもう一度押せば終了されます。</string>
 
@@ -99,5 +97,4 @@
 
     <string name="kakaolink_message_title">[鮮文大学のシャトルバスの時刻表のお知らせ]</string>
     <string name="kakaolink_app_button">アプリで詳細を見る</string>
-
 </resources>
