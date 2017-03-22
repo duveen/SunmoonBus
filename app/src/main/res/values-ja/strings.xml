@@ -1,0 +1,103 @@
+<?xml version="1.0"encoding="utf-8"?>
+
+<resources>
+
+    <string name="app_name">鮮文大学のシャトルバスの時刻表</string>
+    <string name="back_button_toast">\'後に\'ボタンをもう一度押せば終了されます。</string>
+
+    <string name="loading_logo">SM Bus</string>
+    <string name="loading_loading_text">時刻表情報を読み込んでいます。 (最初1回)</string>
+    <string name="loading_show_dataversion_prefix">"このアプリの時刻表バージョンは["</string>
+    <string name="loading_show_dataversion_suffix">"]です。"</string>
+    <string name="loading_error_get_holiday_date">休み期間を読み込まれません。 直接設定してください.</string>
+
+    <string name="loading_update_alert">お知らせ</string>
+    <string name="loading_update_message_important">新しいバージョンが発売されました。 重要アップデートが含まれていますので、必ずアップデートをお願いします。 お不便をおかけして申し訳ありません。\n\n[アップデート内容]\n</string>
+    <string name="loading_update_positive">アップデート</string>
+    <string name="loading_update_message">新しいバージョンが発売されました。 アップデートを希望する方はアップデートボタンをクリックしてください!\n\n[アップデート内容]\n</string>
+    <string name="loading_update_negative_exit">終了</string>
+    <string name="loading_update_negative_cancel">キャンセル</string>
+    <string name="loading_receive_error_toast_message">バージョン情報受信に失敗しました。 アプリを再実行させてください.</string>
+
+    <string name="main_menu_weekday">平日</string>
+    <string name="main_menu_saturday_noholiday"> 土曜日/公休日</string>
+    <string name="main_menu_saturday_holiday">土曜日/日曜日/公休日</string>
+    <string name="main_menu_sunday">日曜日</string>
+    <string name="main_menu_setting">設定</string>
+
+    <string name="main_show_holiday">休み期間なので、休み時刻表で表示します。</string>
+
+    <string name="main_notice_move">移動</string>
+    <string name="main_notice_ok">確認</string>
+    <string name="main_notice_cancel">キャンセル</string>
+
+    <string name="main_ad_alert_title">お知らせ</string>
+    <string name="main_ad_alert_message">広告を見てくださってありがとうございます!\nの広告が嫌なら設定で広告の除去を購買できます。</string>
+    <string name="main_ad_alert_yes">購買する</string>
+    <string name="main_ad_alert_no">しません(今日広告を見ない)</string>
+
+    <string name="main_snackbar_weekday">平日の時刻表で表示します。</string>
+    <string name="main_snackbar_saturday"> 土曜日/公休日時刻表で表示します。</string>
+    <string name="main_snackbar_sunday">日曜日時刻表で表示します。</string>
+    <string name="main_snackbar_weekend">土曜日/公休日/日曜日時刻表で表示します。</string>
+    <string name="main_snackbar_ok">確認</string>
+
+    <string name="region_cheonan_asan_station">天安駅/牙山(KTX)駅</string>
+    <string name="region_cheonan_terminal">天安ターミナル</string>
+    <string name="region_onyang_station_terminal">温陽駅/ターミナル</string>
+    <string name="region_cheonan_campus">天安キャンパス</string>
+    <string name="region_cheonan_to_asan">天安キャンパス->牙山キャンパス</string>
+    <string name="region_asan_to_cheonan">牙山キャンパス->天安キャンパス</string>
+
+    <string name="region_depart_asancampus">牙山キャンパス\n(出発)</string>
+    <string name="region_depart_asancampus_without_n">牙山キャンパス(出発)</string>
+    <string name="region_asan_station">牙山駅(KTX)</string>
+    <string name="region_cheonan_station">天安駅</string>
+    <string name="region_arrive_asancampus">牙山キャンパス\n(到着)</string>
+    <string name="region_arrive_asancampus_without_n">牙山キャンパス(到着)</string>
+    <string name="region_terminal">ターミナル</string>
+    <string name="region_baebang">の排芳地域</string>
+    <string name="region_onyang_station">温陽駅</string>
+    <string name="region_onyang_terminal">温陽ターミナル</string>
+    <string name="region_depart_cheonancampus">天安キャンパス\n(出発)</string>
+    <string name="region_depart_cheonancampus_without_n">天安キャンパス(出発)</string>
+    <string name="region_cheongsu">清水洞</string>
+    <string name="region_sinbang">新芳洞</string>
+    <string name="region_arrive_cheonancampus">天安キャンパス\n(到着)</string>
+    <string name="region_arrive_cheonancampus_without_n">天安キャンパス(到着)</string>
+
+    <string name="setting_menu_reload_timetable">時刻表をまた読み込み、</string>
+    <string name="setting_menu_setting_holiday">休みの期間中、手動設定する</string>
+    <string name="setting_menu_remove_ad">広告除去する</string>
+    <string name="setting_menu_kakao">カカオトークでお問い合わせする</string>
+    <string name="setting_menu_about_application">アプリケーション情報</string>
+
+    <string name="setup_removead_alert_title">お知らせ</string>
+    <string name="setup_removead_alert_message">、すでに広告除去することを購入しました。</string>
+    <string name="setup_removead_alert_button">確認</string>
+    <string name="setup_removead_error_toast_message">設定画面を再実行してください!</string>
+
+    <string name="setup_reloadtime_alert_title">お知らせ</string>
+    <string name="setup_reloadtime_alert_message">時刻表を再設定する際、手動で休み期間を設定したら、設定内容が削除されます。 時刻表を再び요미込んでいただけますか?</string>
+    <string name="setup_reloadtime_alert_yes">はい</string>
+    <string name="setup_reloadtime_alert_no">いいえ</string>
+    <string name="setup_reloadtime_toast_message">データ受信の為、アップルを再実行させてください!</string>
+
+    <string name="setting_vacation_start_date">開始日</string>
+    <string name="setting_vacation_end_date">終了日</string>
+    <string name="setting_vacation_title">設定</string>
+    <string name="setting_vacation_positive">確認</string>
+    <string name="setting_vacation_ok_toast">アップルを再実行すると適用が完了されます。</string>
+    <string name="setting_vacation_error_toast_start">エラー:休み終了期間より先の日付を選択しました。</string>
+    <string name="setting_vacation_error_toast_end">エラー:休み開始期間より過去の日付を選択しました。</string>
+
+    <string name="info_application_version">アプリケーションのバージョン:</string>
+    <string name="info_timetable_version">シャトルの時刻表バージョン:</string>
+    <string name="info_vacation_period">休み期間:</string>
+    <string name="info_introduce">案内\nこのアプリケーションは、学校側で製作したアプリではなく、個人が製作したアプリであるため、お問い合わせは設定画面のお問い合わせのボタンをクリックしてお問い合わせしてください。 ありがとうございます。\nの広告の除去は開発者がさらに開発に集中できる原動力です。 ^^\n\nアプリケーション開発者:コンピュータ工学科のパクミンギュ(duveen@duveen.me)\nデザイナー:視覚デザイン学科キムダヘ(ok_tina@naver.com)</string>
+    <string name="info_copyright">©O3SE Lab.All Right Reserved.</string>
+
+    <string name="kakaolink_message_title">[鮮文大学のシャトルバスの時刻表のお知らせ]</string>
+    <string name="kakaolink_app_button">アプリで詳細を見る</string>
+
+</resources>
