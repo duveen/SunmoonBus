@@ -24,7 +24,7 @@ public class Constants {
     public static CharSequence tabTitles[];
 
     // 버전정보
-    public static double appVersion = 2.0;
+    public static double appVersion = 2.1;
     public static long timeTableVersion;
     public static long vacationPeriodStart;
     public static long vacationPeriodEnd;
