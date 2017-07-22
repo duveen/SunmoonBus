@@ -39,22 +39,13 @@ public class GetHolidayDate implements Runnable {
         Elements elements = document.select("h3");
         String content = elements.get(0).text(); // 운행기간 : yyyy.mm.dd. ~ yyyy.mm.dd
 
-        content = content.replace("운행기간", "");
-        content = content.replace(":", "");
+        content = content.replace("운행기간", "").replace(":", "").replace(".", "").replace(" ", "").replace("~", "");
 
-        StringTokenizer str = new StringTokenizer(content, ".~ ");
-        if (str.countTokens() != 6) {
+        if(content.length() != 16) {
             Toast.makeText(Constants.activity, R.string.loading_error_get_holiday_date, Toast.LENGTH_SHORT).show();
             activity.holidayStatus = Constants.DONTKNOW;
             return;
         }
-
-        String fromYear = str.nextToken();
-        String fromMonth = str.nextToken();
-        String fromDateOfMonth = str.nextToken();
-        String toYear = str.nextToken();
-        String toMonth = str.nextToken();
-        String toDateOfMonth = str.nextToken();
 
         SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
 
@@ -62,8 +53,8 @@ public class GetHolidayDate implements Runnable {
         long toDate;
 
         try {
-            fromDate = sdf.parse(fromYear + fromMonth + fromDateOfMonth).getTime();
-            toDate = sdf.parse(toYear + toMonth + toDateOfMonth).getTime() + (1000 * 24 * 60 * 60 - 1000);
+            fromDate = sdf.parse(content.substring(0, 8)).getTime();
+            toDate = sdf.parse(content.substring(8, 16)).getTime() + (1000 * 24 * 60 * 60 - 1000);
 
             Constants.vacationPeriodStart = fromDate;
             Constants.vacationPeriodEnd = toDate;
@@ -72,7 +63,6 @@ public class GetHolidayDate implements Runnable {
             editor.putLong(Constants.HOLIDAY_PERIOD_START, fromDate);
             editor.putLong(Constants.HOLIDAY_PERIOD_END, toDate);
             editor.commit();
-
         } catch (Exception e) {
             activity.holidayStatus = Constants.DONTKNOW;
             return;
