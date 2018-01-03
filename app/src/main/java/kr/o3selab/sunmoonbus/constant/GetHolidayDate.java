@@ -9,7 +9,7 @@ import org.jsoup.select.Elements;
 
 import java.text.SimpleDateFormat;
 
-import kr.o3selab.sunmoonbus.LoadingActivity;
+import kr.o3selab.sunmoonbus.activity.LoadingActivity;
 import kr.o3selab.sunmoonbus.R;
 
 public class GetHolidayDate implements Runnable {
@@ -26,12 +26,12 @@ public class GetHolidayDate implements Runnable {
         try {
             document = Jsoup.connect(API.getHolidayUrl()).get();
         } catch (Exception e) {
-            activity.holidayStatus = Constants.DONTKNOW;
+            activity.holidayStatus = ConstantsOld.DONTKNOW;
             return;
         }
 
         if (document == null) {
-            activity.holidayStatus = Constants.DONTKNOW;
+            activity.holidayStatus = ConstantsOld.DONTKNOW;
             return;
         }
 
@@ -41,8 +41,8 @@ public class GetHolidayDate implements Runnable {
         content = content.replace("운행기간", "").replace(":", "").replace(".", "").replace(" ", "").replace("~", "");
 
         if(content.length() != 16) {
-            Toast.makeText(Constants.activity, R.string.loading_error_get_holiday_date, Toast.LENGTH_SHORT).show();
-            activity.holidayStatus = Constants.DONTKNOW;
+            Toast.makeText(ConstantsOld.activity, R.string.loading_error_get_holiday_date, Toast.LENGTH_SHORT).show();
+            activity.holidayStatus = ConstantsOld.DONTKNOW;
             return;
         }
 
@@ -55,24 +55,24 @@ public class GetHolidayDate implements Runnable {
             fromDate = sdf.parse(content.substring(0, 8)).getTime();
             toDate = sdf.parse(content.substring(8, 16)).getTime() + (1000 * 24 * 60 * 60 - 1000);
 
-            Constants.vacationPeriodStart = fromDate;
-            Constants.vacationPeriodEnd = toDate;
+            ConstantsOld.vacationPeriodStart = fromDate;
+            ConstantsOld.vacationPeriodEnd = toDate;
 
-            SharedPreferences.Editor editor = Constants.getEditor();
-            editor.putLong(Constants.HOLIDAY_PERIOD_START, fromDate);
-            editor.putLong(Constants.HOLIDAY_PERIOD_END, toDate);
+            SharedPreferences.Editor editor = ConstantsOld.getEditor();
+            editor.putLong(ConstantsOld.HOLIDAY_PERIOD_START, fromDate);
+            editor.putLong(ConstantsOld.HOLIDAY_PERIOD_END, toDate);
             editor.commit();
         } catch (Exception e) {
-            activity.holidayStatus = Constants.DONTKNOW;
+            activity.holidayStatus = ConstantsOld.DONTKNOW;
             return;
         }
 
         long currentDate = System.currentTimeMillis();
 
         if (currentDate >= fromDate && currentDate <= toDate) {
-            activity.holidayStatus = Constants.HOLIDAY;
+            activity.holidayStatus = ConstantsOld.HOLIDAY;
         } else {
-            activity.holidayStatus = Constants.NOHOLIDAY;
+            activity.holidayStatus = ConstantsOld.NOHOLIDAY;
         }
     }
 }

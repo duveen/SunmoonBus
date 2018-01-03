@@ -9,7 +9,6 @@ import android.os.Bundle;
 import android.support.design.widget.Snackbar;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AlertDialog;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -31,13 +30,13 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
 
-import kr.o3selab.sunmoonbus.constant.Constants;
+import kr.o3selab.sunmoonbus.R;
+import kr.o3selab.sunmoonbus.constant.ConstantsOld;
 import kr.o3selab.sunmoonbus.model.BackPressed;
 import kr.o3selab.sunmoonbus.model.SlidingTabLayout;
 import kr.o3selab.sunmoonbus.model.ViewPagerAdapter;
-import kr.o3selab.sunmoonbus.R;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends BaseActivity {
 
     static final int MENU_WEEKDAY = Menu.FIRST;
     static final int MENU_SATURDAY = MENU_WEEKDAY + 1;
@@ -108,10 +107,10 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         // Setting Default Data
-        Constants.printLog(1, "Start MainActivity", null);
+        ConstantsOld.printLog(1, "Start MainActivity", null);
 
-        Constants.activity = this;
-        Constants.context = this;
+        ConstantsOld.activity = this;
+        ConstantsOld.context = this;
 
         // Creating The Toolbar and setting it as the Toolbar for the activity
         mToolbar = (Toolbar) findViewById(R.id.main_toolbar);
@@ -129,10 +128,10 @@ public class MainActivity extends AppCompatActivity {
         // Handling Admob AD
         APP_ID = getString(R.string.admob_ad_id);
 
-        boolean isSkip = compareDate(Constants.getSharedPreferences().getLong(Constants.AD_ALERT_SKIP, 0L));
-        if (!Constants.isRemoveAd && !Constants.isFreeUser && isSkip) {
+        boolean isSkip = compareDate(ConstantsOld.getSharedPreferences().getLong(ConstantsOld.AD_ALERT_SKIP, 0L));
+        if (!ConstantsOld.isRemoveAd && !ConstantsOld.isFreeUser && isSkip) {
 
-            Constants.printLog(1, "Initialize Add", null);
+            ConstantsOld.printLog(1, "Initialize Add", null);
             MobileAds.initialize(this, APP_ID);
 
             // Admob Ad
@@ -208,8 +207,8 @@ public class MainActivity extends AppCompatActivity {
                 .setNegativeButton(R.string.main_ad_alert_no, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
-                        SharedPreferences.Editor editor = Constants.getEditor();
-                        editor.putLong(Constants.AD_ALERT_SKIP, System.currentTimeMillis());
+                        SharedPreferences.Editor editor = ConstantsOld.getEditor();
+                        editor.putLong(ConstantsOld.AD_ALERT_SKIP, System.currentTimeMillis());
                         editor.commit();
                     }
                 })
@@ -240,45 +239,45 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void setWeekdayDataWithoutHoliday() {
-        Constants.tabTitles = new CharSequence[]{getString(R.string.region_cheonan_asan_station), getString(R.string.region_cheonan_terminal), getString(R.string.region_onyang_station_terminal), getString(R.string.region_cheonan_campus)};
-        numbOfTabs = Constants.tabTitles.length;
-        mViewPagerAdapter = new ViewPagerAdapter(getSupportFragmentManager(), Constants.tabTitles, numbOfTabs, Constants.WEEKDAY_NOHOLIDAY);
+        ConstantsOld.tabTitles = new CharSequence[]{getString(R.string.region_cheonan_asan_station), getString(R.string.region_cheonan_terminal), getString(R.string.region_onyang_station_terminal), getString(R.string.region_cheonan_campus)};
+        numbOfTabs = ConstantsOld.tabTitles.length;
+        mViewPagerAdapter = new ViewPagerAdapter(getSupportFragmentManager(), ConstantsOld.tabTitles, numbOfTabs, ConstantsOld.WEEKDAY_NOHOLIDAY);
         setUI();
 
         Snackbar.make(getWindow().getDecorView().getRootView(), getString(R.string.main_snackbar_weekday), 3000).setAction(R.string.main_snackbar_ok, snackBarListener).setActionTextColor(Color.rgb(56, 142, 60)).show();
     }
 
     public void setSaturdayDataWithoutHoliday() {
-        Constants.tabTitles = new CharSequence[]{getString(R.string.region_cheonan_asan_station), getString(R.string.region_cheonan_terminal)};
-        numbOfTabs = Constants.tabTitles.length;
-        mViewPagerAdapter = new ViewPagerAdapter(getSupportFragmentManager(), Constants.tabTitles, numbOfTabs, Constants.SATURDAY_NOHOLIDAY);
+        ConstantsOld.tabTitles = new CharSequence[]{getString(R.string.region_cheonan_asan_station), getString(R.string.region_cheonan_terminal)};
+        numbOfTabs = ConstantsOld.tabTitles.length;
+        mViewPagerAdapter = new ViewPagerAdapter(getSupportFragmentManager(), ConstantsOld.tabTitles, numbOfTabs, ConstantsOld.SATURDAY_NOHOLIDAY);
         setUI();
 
         Snackbar.make(getWindow().getDecorView().getRootView(), getString(R.string.main_snackbar_saturday), 3000).setAction(R.string.main_snackbar_ok, snackBarListener).setActionTextColor(Color.rgb(56, 142, 60)).show();
     }
 
     public void setSundayDataWithoutHoliday() {
-        Constants.tabTitles = new CharSequence[]{getString(R.string.region_cheonan_asan_station), getString(R.string.region_cheonan_terminal)};
-        numbOfTabs = Constants.tabTitles.length;
-        mViewPagerAdapter = new ViewPagerAdapter(getSupportFragmentManager(), Constants.tabTitles, numbOfTabs, Constants.SUNDAY_NOHOLIDAY);
+        ConstantsOld.tabTitles = new CharSequence[]{getString(R.string.region_cheonan_asan_station), getString(R.string.region_cheonan_terminal)};
+        numbOfTabs = ConstantsOld.tabTitles.length;
+        mViewPagerAdapter = new ViewPagerAdapter(getSupportFragmentManager(), ConstantsOld.tabTitles, numbOfTabs, ConstantsOld.SUNDAY_NOHOLIDAY);
         setUI();
 
         Snackbar.make(getWindow().getDecorView().getRootView(), getString(R.string.main_snackbar_sunday), 3000).setAction(R.string.main_snackbar_ok, snackBarListener).setActionTextColor(Color.rgb(56, 142, 60)).show();
     }
 
     public void setWeekdayDataWithHoliday() {
-        Constants.tabTitles = new CharSequence[]{getString(R.string.region_cheonan_asan_station), getString(R.string.region_cheonan_terminal), getString(R.string.region_onyang_station_terminal), getString(R.string.region_cheonan_campus)};
-        numbOfTabs = Constants.tabTitles.length;
-        mViewPagerAdapter = new ViewPagerAdapter(getSupportFragmentManager(), Constants.tabTitles, numbOfTabs, Constants.WEEKDAY_HOLIDAY);
+        ConstantsOld.tabTitles = new CharSequence[]{getString(R.string.region_cheonan_asan_station), getString(R.string.region_cheonan_terminal), getString(R.string.region_onyang_station_terminal), getString(R.string.region_cheonan_campus)};
+        numbOfTabs = ConstantsOld.tabTitles.length;
+        mViewPagerAdapter = new ViewPagerAdapter(getSupportFragmentManager(), ConstantsOld.tabTitles, numbOfTabs, ConstantsOld.WEEKDAY_HOLIDAY);
         setUI();
 
         Snackbar.make(getWindow().getDecorView().getRootView(), getString(R.string.main_snackbar_weekday), 3000).setAction(R.string.main_snackbar_ok, snackBarListener).setActionTextColor(Color.rgb(56, 142, 60)).show();
     }
 
     public void setWeekendDataWithHoliday() {
-        Constants.tabTitles = new CharSequence[]{getString(R.string.region_cheonan_asan_station), getString(R.string.region_cheonan_terminal)};
-        numbOfTabs = Constants.tabTitles.length;
-        mViewPagerAdapter = new ViewPagerAdapter(getSupportFragmentManager(), Constants.tabTitles, numbOfTabs, Constants.WEEKEND_HOLIDAY);
+        ConstantsOld.tabTitles = new CharSequence[]{getString(R.string.region_cheonan_asan_station), getString(R.string.region_cheonan_terminal)};
+        numbOfTabs = ConstantsOld.tabTitles.length;
+        mViewPagerAdapter = new ViewPagerAdapter(getSupportFragmentManager(), ConstantsOld.tabTitles, numbOfTabs, ConstantsOld.WEEKEND_HOLIDAY);
         setUI();
 
         Snackbar.make(getWindow().getDecorView().getRootView(), getString(R.string.main_snackbar_weekend), 3000).setAction(R.string.main_snackbar_ok, snackBarListener).setActionTextColor(Color.rgb(56, 142, 60)).show();
@@ -341,8 +340,8 @@ public class MainActivity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
 
-        Constants.activity = this;
-        Constants.context = this;
+        ConstantsOld.activity = this;
+        ConstantsOld.context = this;
     }
 
     @Override

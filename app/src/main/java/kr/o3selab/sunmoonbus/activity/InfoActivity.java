@@ -1,7 +1,6 @@
 package kr.o3selab.sunmoonbus.activity;
 
 import android.graphics.drawable.Drawable;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
@@ -10,10 +9,10 @@ import android.widget.TextView;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-import kr.o3selab.sunmoonbus.constant.Constants;
 import kr.o3selab.sunmoonbus.R;
+import kr.o3selab.sunmoonbus.constant.ConstantsOld;
 
-public class InfoActivity extends AppCompatActivity {
+public class InfoActivity extends BaseActivity {
 
     Toolbar mToolbar;
 
@@ -25,7 +24,7 @@ public class InfoActivity extends AppCompatActivity {
         mToolbar = (Toolbar) findViewById(R.id.info_toolbar);
         setSupportActionBar(mToolbar);
 
-        if(getSupportActionBar() != null) {
+        if (getSupportActionBar() != null) {
             getSupportActionBar().setTitle(R.string.setting_menu_about_application);
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
             getSupportActionBar().setDisplayShowHomeEnabled(true);
@@ -36,13 +35,13 @@ public class InfoActivity extends AppCompatActivity {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy.MM.dd");
 
         TextView infoApplicationVersionView = (TextView) findViewById(R.id.info_application_version);
-        infoApplicationVersionView.setText(infoApplicationVersionView.getText().toString() + " " + Constants.appVersion);
+        infoApplicationVersionView.setText(infoApplicationVersionView.getText().toString() + " " + ConstantsOld.appVersion);
 
         TextView timeTableVersionView = (TextView) findViewById(R.id.info_timetable_version);
-        timeTableVersionView.setText(timeTableVersionView.getText() + " " + sdf.format(new Date(Constants.timeTableVersion)));
+        timeTableVersionView.setText(timeTableVersionView.getText() + " " + sdf.format(new Date(ConstantsOld.timeTableVersion)));
 
         TextView vacationPeriodView = (TextView) findViewById(R.id.info_vacation_period);
-        vacationPeriodView.setText(vacationPeriodView.getText() + " " + sdf.format(new Date(Constants.vacationPeriodStart)) + " ~ " + sdf.format(new Date(Constants.vacationPeriodEnd)));
+        vacationPeriodView.setText(vacationPeriodView.getText() + " " + sdf.format(new Date(ConstantsOld.vacationPeriodStart)) + " ~ " + sdf.format(new Date(ConstantsOld.vacationPeriodEnd)));
     }
 
     @Override
@@ -61,7 +60,7 @@ public class InfoActivity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
 
-        Constants.activity = this;
-        Constants.context = this;
+        ConstantsOld.activity = this;
+        ConstantsOld.context = this;
     }
 }

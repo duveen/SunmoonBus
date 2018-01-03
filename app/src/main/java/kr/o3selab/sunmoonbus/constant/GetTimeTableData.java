@@ -2,7 +2,7 @@ package kr.o3selab.sunmoonbus.constant;
 
 import java.util.Vector;
 
-import kr.o3selab.sunmoonbus.LoadingActivity;
+import kr.o3selab.sunmoonbus.activity.LoadingActivity;
 import kr.o3selab.sunmoonbus.model.DBManager;
 import kr.o3selab.sunmoonbus.model.NetworkGroup;
 import kr.o3selab.sunmoonbus.model.TimeTableData;
@@ -13,7 +13,7 @@ public class GetTimeTableData implements Runnable {
     private LoadingActivity activity;
 
     public GetTimeTableData(LoadingActivity activity) {
-        mDBManager = Constants.mDBManager;
+        mDBManager = ConstantsOld.mDBManager;
         this.activity = activity;
     }
 

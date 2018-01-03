@@ -9,7 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 
-import kr.o3selab.sunmoonbus.constant.Constants;
+import kr.o3selab.sunmoonbus.constant.ConstantsOld;
 import kr.o3selab.sunmoonbus.model.DBManager;
 import kr.o3selab.sunmoonbus.model.TableClickListener;
 import kr.o3selab.sunmoonbus.R;
@@ -29,9 +29,9 @@ public class Tab4 extends Fragment {
 
         mType = getArguments().getInt("type");
 
-        if (mType == Constants.WEEKDAY_NOHOLIDAY)
+        if (mType == ConstantsOld.WEEKDAY_NOHOLIDAY)
             TAG = DBManager.WEEKDAY_NOHOLIDAY_CHEONAN_CAMPUS;
-        else if (mType == Constants.WEEKDAY_HOLIDAY)
+        else if (mType == ConstantsOld.WEEKDAY_HOLIDAY)
             TAG = DBManager.WEEKDAY_HOLIDAY_CHEONAN_CAMPUS;
 
         View v = inflater.inflate(R.layout.tab_4, container, false);
@@ -39,7 +39,7 @@ public class Tab4 extends Fragment {
         LinearLayout tabLayout = (LinearLayout) v.findViewById(R.id.data_table);
 
         String query = "SELECT * FROM " + TAG + ";";
-        Cursor cursor = Constants.mDBManager.execReadSQL(query);
+        Cursor cursor = ConstantsOld.mDBManager.execReadSQL(query);
         int flag = 1;
         boolean nextFlag = false;
         while (cursor.moveToNext()) {

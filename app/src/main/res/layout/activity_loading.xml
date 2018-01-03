@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     android:background="@drawable/splash_image"
     android:orientation="vertical"
-    tools:context="kr.o3selab.sunmoonbus.LoadingActivity">
+    tools:context="kr.o3selab.sunmoonbus.activity.LoadingActivity">
 
     <FrameLayout
         android:layout_width="match_parent"

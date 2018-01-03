@@ -14,7 +14,7 @@
         android:theme="@style/AppTheme">
 
         <activity
-            android:name="kr.o3selab.sunmoonbus.LoadingActivity"
+            android:name="kr.o3selab.sunmoonbus.activity.LoadingActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.FullScreen">
             <intent-filter>

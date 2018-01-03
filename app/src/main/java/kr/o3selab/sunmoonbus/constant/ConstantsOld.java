@@ -15,7 +15,7 @@ import java.util.Date;
 
 import kr.o3selab.sunmoonbus.model.DBManager;
 
-public class Constants {
+public class ConstantsOld {
 
     // 어플리케이션 정보
     public static Activity activity;
@@ -100,7 +100,7 @@ public class Constants {
     private static void sendReport() {
         String sb =
                 "Device Default Information" + "\n" +
-                "DeviceID: " + Constants.deviceID + "\n" +
+                "DeviceID: " + ConstantsOld.deviceID + "\n" +
                 "MODEL: " + Build.MODEL + "\n" +
                 "MANUFACTURER: " + Build.MANUFACTURER + "\n" +
                 "Android Version: " + Build.VERSION.RELEASE + "\n\n" +

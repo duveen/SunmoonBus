@@ -1,4 +1,4 @@
-package kr.o3selab.sunmoonbus;
+package kr.o3selab.sunmoonbus.activity;
 
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -8,7 +8,6 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.provider.Settings;
 import android.support.v7.app.AlertDialog;
-import android.support.v7.app.AppCompatActivity;
 import android.widget.Toast;
 
 import com.akexorcist.roundcornerprogressbar.RoundCornerProgressBar;
@@ -24,14 +23,14 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
 
-import kr.o3selab.sunmoonbus.activity.MainActivity;
+import kr.o3selab.sunmoonbus.R;
 import kr.o3selab.sunmoonbus.constant.API;
-import kr.o3selab.sunmoonbus.constant.Constants;
+import kr.o3selab.sunmoonbus.constant.ConstantsOld;
 import kr.o3selab.sunmoonbus.constant.GetHolidayDate;
 import kr.o3selab.sunmoonbus.constant.GetTimeTableData;
 import kr.o3selab.sunmoonbus.model.DBManager;
 
-public class LoadingActivity extends AppCompatActivity {
+public class LoadingActivity extends BaseActivity {
 
     private DBManager mDBManager;
     public int timeTableStatus;
@@ -44,21 +43,21 @@ public class LoadingActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_loading);
 
-        Constants.activity = this;
-        Constants.context = this;
-        Constants.logs = new StringBuilder();
+        ConstantsOld.activity = this;
+        ConstantsOld.context = this;
+        ConstantsOld.logs = new StringBuilder();
 
         try {
-            Constants.deviceID = AdvertisingIdClient.getAdvertisingIdInfo(this).getId();
+            ConstantsOld.deviceID = AdvertisingIdClient.getAdvertisingIdInfo(this).getId();
         } catch (Exception e) {
-            Constants.deviceID = Settings.Secure.getString(getContentResolver(), Settings.Secure.ANDROID_ID);
+            ConstantsOld.deviceID = Settings.Secure.getString(getContentResolver(), Settings.Secure.ANDROID_ID);
         }
 
         pBar = (RoundCornerProgressBar) findViewById(R.id.progressBar);
         pBar.setMax(14);
 
         mDBManager = new DBManager(this, "SMBus.db", null, 1);
-        Constants.mDBManager = mDBManager;
+        ConstantsOld.mDBManager = mDBManager;
 
         timeTableStatus = 0;
         holidayStatus = 0;
@@ -76,14 +75,14 @@ public class LoadingActivity extends AppCompatActivity {
                 @Override
                 public void onDataChange(DataSnapshot dataSnapshot) {
                     if (dataSnapshot.getValue() != null) {
-                        boolean isFreeUser = dataSnapshot.getValue().toString().contains(Constants.deviceID);
-                        SharedPreferences.Editor editor = Constants.getEditor();
+                        boolean isFreeUser = dataSnapshot.getValue().toString().contains(ConstantsOld.deviceID);
+                        SharedPreferences.Editor editor = ConstantsOld.getEditor();
                         if (isFreeUser) {
-                            Constants.isFreeUser = true;
-                            editor.putBoolean(Constants.FREE_USER, true);
+                            ConstantsOld.isFreeUser = true;
+                            editor.putBoolean(ConstantsOld.FREE_USER, true);
                         } else {
-                            Constants.isFreeUser = false;
-                            editor.putBoolean(Constants.FREE_USER, false);
+                            ConstantsOld.isFreeUser = false;
+                            editor.putBoolean(ConstantsOld.FREE_USER, false);
                         }
                         editor.commit();
                     }
@@ -106,10 +105,10 @@ public class LoadingActivity extends AppCompatActivity {
                     Boolean isImportant = (Boolean) map.get("isImportant");
                     String updateContent = (String) map.get("update_content");
 
-                    Constants.printLog(1, "AppVersion : " + Constants.appVersion + ", releasedVersion : " + releasedVersion, null);
-                    Constants.printLog(1, "isImportantUpdate : " + isImportant, null);
+                    ConstantsOld.printLog(1, "AppVersion : " + ConstantsOld.appVersion + ", releasedVersion : " + releasedVersion, null);
+                    ConstantsOld.printLog(1, "isImportantUpdate : " + isImportant, null);
 
-                    if (Constants.appVersion == releasedVersion) {
+                    if (ConstantsOld.appVersion == releasedVersion) {
                         initalization();
                     } else {
                         if (isImportant) {
@@ -169,7 +168,7 @@ public class LoadingActivity extends AppCompatActivity {
 
 
         } catch (Exception e) {
-            Constants.printLog(2, null, e);
+            ConstantsOld.printLog(2, null, e);
         }
     }
 
@@ -179,16 +178,16 @@ public class LoadingActivity extends AppCompatActivity {
 
         if (versionCursor.moveToNext()) {
             // 셔틀 버전 불러오기
-            Constants.printLog(1, "Start Loading.. Version : " + versionCursor.getString(0), null);
-            Constants.timeTableVersion = Long.parseLong(versionCursor.getString(0));
-            String time = new SimpleDateFormat("yyyy.MM.dd").format(new Date(Constants.timeTableVersion));
+            ConstantsOld.printLog(1, "Start Loading.. Version : " + versionCursor.getString(0), null);
+            ConstantsOld.timeTableVersion = Long.parseLong(versionCursor.getString(0));
+            String time = new SimpleDateFormat("yyyy.MM.dd").format(new Date(ConstantsOld.timeTableVersion));
             Toast.makeText(this, getString(R.string.loading_show_dataversion_prefix) + time + getString(R.string.loading_show_dataversion_suffix), Toast.LENGTH_SHORT).show();
 
             pBar.setMax(1);
 
             goNextActivity();
         } else {
-            Constants.printLog(1, "Start First Loading..", null);
+            ConstantsOld.printLog(1, "Start First Loading..", null);
             pBar.setMax(pBar.getMax() + 1);
 
             new Thread(new Runnable() {
@@ -197,14 +196,14 @@ public class LoadingActivity extends AppCompatActivity {
                     try {
                         // 날짜 정보 불러오기
                         insertDate();
-                        Constants.printLog(1, "Insert Date : " + System.currentTimeMillis(), null);
+                        ConstantsOld.printLog(1, "Insert Date : " + System.currentTimeMillis(), null);
 
                         // 셔틀 시간표 불러오기
                         new Thread(new GetTimeTableData(LoadingActivity.this)).start();
 
                         while (true) {
                             if (timeTableStatus == API.SUCCESS) {
-                                Constants.printLog(1, "Success Get Time Table", null);
+                                ConstantsOld.printLog(1, "Success Get Time Table", null);
                                 break;
                             } else if (timeTableStatus == API.HTTP_HANDLER_ERROR) {
                                 showDontReceiveData(new Exception("HTTP handling error"));
@@ -216,15 +215,15 @@ public class LoadingActivity extends AppCompatActivity {
                         new Thread(new GetHolidayDate(LoadingActivity.this)).start();
 
                         while (true) {
-                            if (holidayStatus == Constants.HOLIDAY) {
-                                Constants.printLog(1, "Success Get Holiday Date : true", null);
+                            if (holidayStatus == ConstantsOld.HOLIDAY) {
+                                ConstantsOld.printLog(1, "Success Get Holiday Date : true", null);
                                 isHoliday = true;
                                 break;
-                            } else if (holidayStatus == Constants.NOHOLIDAY) {
-                                Constants.printLog(1, "Success Get Holiday Date : false", null);
+                            } else if (holidayStatus == ConstantsOld.NOHOLIDAY) {
+                                ConstantsOld.printLog(1, "Success Get Holiday Date : false", null);
                                 isHoliday = false;
                                 break;
-                            } else if (holidayStatus == Constants.DONTKNOW) {
+                            } else if (holidayStatus == ConstantsOld.DONTKNOW) {
                                 showDontReceiveData(new Exception("Don't know holiday status"));
                                 return;
                             }
@@ -254,12 +253,12 @@ public class LoadingActivity extends AppCompatActivity {
     public void insertDate() {
         Long time = System.currentTimeMillis();
         String query = "insert into info (date) values ('" + time + "');";
-        Constants.timeTableVersion = time;
-        Constants.mDBManager.execWriteSQL(query);
+        ConstantsOld.timeTableVersion = time;
+        ConstantsOld.mDBManager.execWriteSQL(query);
     }
 
     public void showDontReceiveData(Exception e) {
-        Constants.printLog(2, null, e);
+        ConstantsOld.printLog(2, null, e);
         mDBManager.deleteAllData();
         runOnUiThread(new Runnable() {
             @Override
@@ -274,28 +273,28 @@ public class LoadingActivity extends AppCompatActivity {
 
         upProgressValue();
 
-        SharedPreferences sharedPreferences = Constants.getSharedPreferences();
-        long fromDate = sharedPreferences.getLong(Constants.HOLIDAY_PERIOD_START, 0L);
-        long toDate = sharedPreferences.getLong(Constants.HOLIDAY_PERIOD_END, 0L);
+        SharedPreferences sharedPreferences = ConstantsOld.getSharedPreferences();
+        long fromDate = sharedPreferences.getLong(ConstantsOld.HOLIDAY_PERIOD_START, 0L);
+        long toDate = sharedPreferences.getLong(ConstantsOld.HOLIDAY_PERIOD_END, 0L);
 
-        Constants.printLog(1, "Vacation Date Start : " + fromDate, null);
-        Constants.printLog(1, "Vacation Date End : " + toDate, null);
+        ConstantsOld.printLog(1, "Vacation Date Start : " + fromDate, null);
+        ConstantsOld.printLog(1, "Vacation Date End : " + toDate, null);
 
         if (fromDate != 0L && toDate != 0L) {
-            Constants.vacationPeriodStart = fromDate;
-            Constants.vacationPeriodEnd = toDate;
+            ConstantsOld.vacationPeriodStart = fromDate;
+            ConstantsOld.vacationPeriodEnd = toDate;
 
             long currentDate = System.currentTimeMillis();
             isHoliday = currentDate >= fromDate && currentDate <= toDate;
         }
 
-        Constants.isRemoveAd = sharedPreferences.getBoolean(Constants.REMOVE_AD, false);
-        Constants.isFreeUser = sharedPreferences.getBoolean(Constants.FREE_USER, false);
+        ConstantsOld.isRemoveAd = sharedPreferences.getBoolean(ConstantsOld.REMOVE_AD, false);
+        ConstantsOld.isFreeUser = sharedPreferences.getBoolean(ConstantsOld.FREE_USER, false);
 
-        Constants.printLog(1, "MyDeviceID : " + Constants.deviceID, null);
-        Constants.printLog(1, "isHoliday : " + isHoliday, null);
-        Constants.printLog(1, "isRemoveAd : " + Constants.isRemoveAd, null);
-        Constants.printLog(1, "isFreeUser : " + Constants.isFreeUser, null);
+        ConstantsOld.printLog(1, "MyDeviceID : " + ConstantsOld.deviceID, null);
+        ConstantsOld.printLog(1, "isHoliday : " + isHoliday, null);
+        ConstantsOld.printLog(1, "isRemoveAd : " + ConstantsOld.isRemoveAd, null);
+        ConstantsOld.printLog(1, "isFreeUser : " + ConstantsOld.isFreeUser, null);
 
         runOnUiThread(new Runnable() {
             @Override
@@ -318,7 +317,7 @@ public class LoadingActivity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
 
-        Constants.activity = this;
-        Constants.context = this;
+        ConstantsOld.activity = this;
+        ConstantsOld.context = this;
     }
 }

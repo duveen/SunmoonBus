@@ -10,7 +10,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import kr.o3selab.sunmoonbus.constant.Constants;
+import kr.o3selab.sunmoonbus.constant.ConstantsOld;
 import kr.o3selab.sunmoonbus.R;
 
 public class TableClickListener implements View.OnClickListener {
@@ -25,7 +25,7 @@ public class TableClickListener implements View.OnClickListener {
     private String[] mDatas;
 
     public TableClickListener(String location, int itemCount, String[] datas) {
-        mContext = Constants.context;
+        mContext = ConstantsOld.context;
         mDatas = datas;
         mLocation = location;
         mItemCount = itemCount;

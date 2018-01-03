@@ -9,7 +9,6 @@ import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.MenuItem;
@@ -22,15 +21,15 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.StringTokenizer;
 
-import kr.o3selab.sunmoonbus.constant.Constants;
 import kr.o3selab.sunmoonbus.R;
+import kr.o3selab.sunmoonbus.constant.ConstantsOld;
 import kr.o3selab.sunmoonbus.util.IabBroadcastReceiver;
 import kr.o3selab.sunmoonbus.util.IabHelper;
 import kr.o3selab.sunmoonbus.util.IabResult;
 import kr.o3selab.sunmoonbus.util.Inventory;
 import kr.o3selab.sunmoonbus.util.Purchase;
 
-public class SetupActivity extends AppCompatActivity implements IabBroadcastReceiver.IabBroadcastListener {
+public class SetupActivity extends BaseActivity implements IabBroadcastReceiver.IabBroadcastListener {
 
     public static final String TAG = "SMBus";
 
@@ -52,11 +51,11 @@ public class SetupActivity extends AppCompatActivity implements IabBroadcastRece
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_setup);
 
-        if (!Constants.isRemoveAd && !Constants.isFreeUser) {
+        if (!ConstantsOld.isRemoveAd && !ConstantsOld.isFreeUser) {
             String base64EncodedPublicKey = getString(R.string.base_64_key);
 
             // Create the helper, passing it our context and the public key to verify signatures with
-            Constants.printLog(1, "Creating IAB helper.", null);
+            ConstantsOld.printLog(1, "Creating IAB helper.", null);
             mHelper = new IabHelper(this, base64EncodedPublicKey);
 
             // enable debug logging (for a production application, you should set this to false).
@@ -64,14 +63,14 @@ public class SetupActivity extends AppCompatActivity implements IabBroadcastRece
 
             // Start setup. This is asynchronous and the specified listener
             // will be called once setup completes.
-            Constants.printLog(1, "Starting setup.", null);
+            ConstantsOld.printLog(1, "Starting setup.", null);
             mHelper.startSetup(new IabHelper.OnIabSetupFinishedListener() {
                 @Override
                 public void onIabSetupFinished(IabResult result) {
-                    Constants.printLog(1, "Setup finished.", null);
+                    ConstantsOld.printLog(1, "Setup finished.", null);
 
                     if (!result.isSuccess()) {
-                        Constants.printLog(2, "Problem setting up in-app billing: " + result, null);
+                        ConstantsOld.printLog(2, "Problem setting up in-app billing: " + result, null);
                         return;
                     }
 
@@ -81,11 +80,11 @@ public class SetupActivity extends AppCompatActivity implements IabBroadcastRece
                     IntentFilter broadcastFilter = new IntentFilter(IabBroadcastReceiver.ACTION);
                     registerReceiver(mBroadcastReceiver, broadcastFilter);
 
-                    Constants.printLog(1, "Setup successful. Querying inventory.", null);
+                    ConstantsOld.printLog(1, "Setup successful. Querying inventory.", null);
                     try {
                         mHelper.queryInventoryAsync(mGotInventoryListener);
                     } catch (IabHelper.IabAsyncInProgressException e) {
-                        Constants.printLog(2, "Error querying inventory. Another async operation in progress.", null);
+                        ConstantsOld.printLog(2, "Error querying inventory. Another async operation in progress.", null);
                     }
                 }
             });
@@ -142,7 +141,7 @@ public class SetupActivity extends AppCompatActivity implements IabBroadcastRece
                     .setPositiveButton(R.string.setup_reloadtime_alert_yes, new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialogInterface, int i) {
-                            Constants.mDBManager.deleteAllData();
+                            ConstantsOld.mDBManager.deleteAllData();
                             Toast.makeText(SetupActivity.this, R.string.setup_reloadtime_toast_message, Toast.LENGTH_SHORT).show();
                             finishAffinity();
                         }
@@ -173,7 +172,7 @@ public class SetupActivity extends AppCompatActivity implements IabBroadcastRece
                             final SimpleDateFormat sdf = new SimpleDateFormat("yyyy.MM.dd");
                             switch (setVFlag) {
                                 case 0:
-                                    StringTokenizer str = new StringTokenizer(sdf.format(new Date(Constants.vacationPeriodStart)), ".");
+                                    StringTokenizer str = new StringTokenizer(sdf.format(new Date(ConstantsOld.vacationPeriodStart)), ".");
 
                                     int year = Integer.parseInt(str.nextToken());
                                     int month = Integer.parseInt(str.nextToken()) - 1;
@@ -185,14 +184,14 @@ public class SetupActivity extends AppCompatActivity implements IabBroadcastRece
                                             try {
                                                 long time = sdf.parse(year + "." + (month + 1) + "." + date).getTime();
 
-                                                if(time > Constants.vacationPeriodEnd) {
+                                                if (time > ConstantsOld.vacationPeriodEnd) {
                                                     Toast.makeText(SetupActivity.this, R.string.setting_vacation_error_toast_start, Toast.LENGTH_SHORT).show();
                                                     return;
                                                 }
 
-                                                Constants.vacationPeriodStart = time;
-                                                SharedPreferences.Editor editor = Constants.getEditor();
-                                                editor.putLong(Constants.HOLIDAY_PERIOD_START, time);
+                                                ConstantsOld.vacationPeriodStart = time;
+                                                SharedPreferences.Editor editor = ConstantsOld.getEditor();
+                                                editor.putLong(ConstantsOld.HOLIDAY_PERIOD_START, time);
                                                 editor.commit();
 
                                                 Toast.makeText(SetupActivity.this, R.string.setting_vacation_ok_toast, Toast.LENGTH_SHORT).show();
@@ -206,7 +205,7 @@ public class SetupActivity extends AppCompatActivity implements IabBroadcastRece
                                     break;
 
                                 case 1:
-                                    StringTokenizer str2 = new StringTokenizer(sdf.format(new Date(Constants.vacationPeriodEnd)), ".");
+                                    StringTokenizer str2 = new StringTokenizer(sdf.format(new Date(ConstantsOld.vacationPeriodEnd)), ".");
 
                                     int year2 = Integer.parseInt(str2.nextToken());
                                     int month2 = Integer.parseInt(str2.nextToken()) - 1;
@@ -218,14 +217,14 @@ public class SetupActivity extends AppCompatActivity implements IabBroadcastRece
                                             try {
                                                 long time = sdf.parse(year + "." + (month + 1) + "." + date).getTime();
 
-                                                if(time < Constants.vacationPeriodStart) {
+                                                if (time < ConstantsOld.vacationPeriodStart) {
                                                     Toast.makeText(SetupActivity.this, R.string.setting_vacation_error_toast_end, Toast.LENGTH_SHORT).show();
                                                     return;
                                                 }
 
-                                                Constants.vacationPeriodEnd = time  + (1000 * 24 * 60 * 60 - 1000);
-                                                SharedPreferences.Editor editor = Constants.getEditor();
-                                                editor.putLong(Constants.HOLIDAY_PERIOD_END, time);
+                                                ConstantsOld.vacationPeriodEnd = time + (1000 * 24 * 60 * 60 - 1000);
+                                                SharedPreferences.Editor editor = ConstantsOld.getEditor();
+                                                editor.putLong(ConstantsOld.HOLIDAY_PERIOD_END, time);
                                                 editor.commit();
 
                                                 Toast.makeText(SetupActivity.this, R.string.setting_vacation_ok_toast, Toast.LENGTH_SHORT).show();
@@ -247,7 +246,7 @@ public class SetupActivity extends AppCompatActivity implements IabBroadcastRece
     View.OnClickListener removeAdListener = new View.OnClickListener() {
         @Override
         public void onClick(View view) {
-            if (!Constants.isRemoveAd && !Constants.isFreeUser) {
+            if (!ConstantsOld.isRemoveAd && !ConstantsOld.isFreeUser) {
                 startPurchaseAdProcess();
             } else {
                 new AlertDialog.Builder(SetupActivity.this)
@@ -262,19 +261,19 @@ public class SetupActivity extends AppCompatActivity implements IabBroadcastRece
 
     public void startPurchaseAdProcess() {
         try {
-            Constants.printLog(1, "Launching purchase flow for remove ad.", null);
+            ConstantsOld.printLog(1, "Launching purchase flow for remove ad.", null);
             String payload = REMOVE_AD_PAYLOAD;
 
             try {
                 mHelper.launchPurchaseFlow(SetupActivity.this, REMOVE_AD, RC_REQUEST, mPurchaseFinishedListener, payload);
             } catch (IabHelper.IabAsyncInProgressException e) {
-                Constants.printLog(2, "Error launching purchase flow. Another async operation in progress.", null);
+                ConstantsOld.printLog(2, "Error launching purchase flow. Another async operation in progress.", null);
                 Toast.makeText(this, R.string.setup_removead_error_toast_message, Toast.LENGTH_SHORT).show();
                 this.finish();
             }
 
         } catch (Exception e) {
-            Constants.printLog(2, null, e);
+            ConstantsOld.printLog(2, null, e);
         }
     }
 
@@ -288,7 +287,7 @@ public class SetupActivity extends AppCompatActivity implements IabBroadcastRece
 
             // Is it a failure?
             if (result.isFailure()) {
-                Constants.printLog(2, "Failed to query inventory: " + result, null);
+                ConstantsOld.printLog(2, "Failed to query inventory: " + result, null);
                 return;
             }
 
@@ -300,8 +299,8 @@ public class SetupActivity extends AppCompatActivity implements IabBroadcastRece
             Log.d(TAG, "User is " + (mIsRemoveAd ? "REMOVE AD" : "NOT REMOVE AD"));
 
             if (mIsRemoveAd) {
-                SharedPreferences.Editor editor = Constants.getEditor();
-                editor.putBoolean(Constants.REMOVE_AD, true);
+                SharedPreferences.Editor editor = ConstantsOld.getEditor();
+                editor.putBoolean(ConstantsOld.REMOVE_AD, true);
                 editor.commit();
 
                 removeADView.setClickable(false);
@@ -313,29 +312,29 @@ public class SetupActivity extends AppCompatActivity implements IabBroadcastRece
     // Callback for when a purchase is finished
     IabHelper.OnIabPurchaseFinishedListener mPurchaseFinishedListener = new IabHelper.OnIabPurchaseFinishedListener() {
         public void onIabPurchaseFinished(IabResult result, Purchase purchase) {
-            Constants.printLog(1, "Purchase finished: " + result + ", purchase: " + purchase.getOrderId(), null);
+            ConstantsOld.printLog(1, "Purchase finished: " + result + ", purchase: " + purchase.getOrderId(), null);
 
             // if we were disposed of in the meantime, quit.
             if (mHelper == null) return;
 
             if (result.isFailure()) {
-                Constants.printLog(2, "Error purchasing: " + result, null);
+                ConstantsOld.printLog(2, "Error purchasing: " + result, null);
                 return;
             }
             if (!verifyDeveloperPayload(purchase, REMOVE_AD_PAYLOAD)) {
-                Constants.printLog(2, "Error purchasing. Authenticity verification failed.", null);
+                ConstantsOld.printLog(2, "Error purchasing. Authenticity verification failed.", null);
                 return;
             }
 
-            Constants.printLog(3, "Purchase successful.", null);
+            ConstantsOld.printLog(3, "Purchase successful.", null);
             if (purchase.getSku().equals(REMOVE_AD)) {
-                Constants.printLog(3, "Purchase is remove ad package.", null);
+                ConstantsOld.printLog(3, "Purchase is remove ad package.", null);
 
-                SharedPreferences.Editor editor = Constants.getEditor();
-                editor.putBoolean(Constants.REMOVE_AD, true);
+                SharedPreferences.Editor editor = ConstantsOld.getEditor();
+                editor.putBoolean(ConstantsOld.REMOVE_AD, true);
                 editor.commit();
 
-                Constants.isRemoveAd = true;
+                ConstantsOld.isRemoveAd = true;
                 removeADView.setEnabled(false);
                 removeADView.setClickable(false);
             }
@@ -346,8 +345,8 @@ public class SetupActivity extends AppCompatActivity implements IabBroadcastRece
     protected void onResume() {
         super.onResume();
 
-        Constants.activity = this;
-        Constants.context = this;
+        ConstantsOld.activity = this;
+        ConstantsOld.context = this;
     }
 
     @Override
@@ -356,13 +355,13 @@ public class SetupActivity extends AppCompatActivity implements IabBroadcastRece
 
         // very important:
         if (mBroadcastReceiver != null) {
-            Constants.printLog(1, "unregisterReciver", null);
+            ConstantsOld.printLog(1, "unregisterReciver", null);
             unregisterReceiver(mBroadcastReceiver);
         }
 
         // very important:
         if (mHelper != null) {
-            Constants.printLog(1, "Destroing Helper", null);
+            ConstantsOld.printLog(1, "Destroing Helper", null);
             mHelper.disposeWhenFinished();
             mHelper = null;
         }

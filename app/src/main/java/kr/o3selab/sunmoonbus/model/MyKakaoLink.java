@@ -7,18 +7,18 @@ import com.kakao.kakaolink.KakaoTalkLinkMessageBuilder;
 import com.kakao.kakaolink.internal.Action;
 import com.kakao.util.KakaoParameterException;
 
-import kr.o3selab.sunmoonbus.constant.Constants;
+import kr.o3selab.sunmoonbus.constant.ConstantsOld;
 import kr.o3selab.sunmoonbus.R;
 
 class MyKakaoLink extends KakaoLink {
 
     static void sendKakaoMessage(String location, String... args) {
         try {
-            final KakaoLink kakaoLink = KakaoLink.getKakaoLink(Constants.context);
+            final KakaoLink kakaoLink = KakaoLink.getKakaoLink(ConstantsOld.context);
             final KakaoTalkLinkMessageBuilder kakaoTalkLinkMessageBuilder = kakaoLink.createKakaoTalkLinkMessageBuilder();
 
             StringBuilder message = new StringBuilder();
-            message.append(Constants.context.getString(R.string.kakaolink_message_title)).append("\n");
+            message.append(ConstantsOld.context.getString(R.string.kakaolink_message_title)).append("\n");
             message.append(location).append("\n");
             for (int i = 0; i < args.length; i++) {
                 if (i == args.length - 1)
@@ -28,11 +28,11 @@ class MyKakaoLink extends KakaoLink {
             }
 
             kakaoTalkLinkMessageBuilder.addText(message.toString());
-            kakaoTalkLinkMessageBuilder.addAppButton(Constants.context.getString(R.string.kakaolink_app_button), getAppAction("2.0"));
+            kakaoTalkLinkMessageBuilder.addAppButton(ConstantsOld.context.getString(R.string.kakaolink_app_button), getAppAction("2.0"));
 
-            kakaoLink.sendMessage(kakaoTalkLinkMessageBuilder, Constants.context);
+            kakaoLink.sendMessage(kakaoTalkLinkMessageBuilder, ConstantsOld.context);
         } catch (Exception exception) {
-            Constants.printLog(2, null, exception);
+            ConstantsOld.printLog(2, null, exception);
         }
     }
 

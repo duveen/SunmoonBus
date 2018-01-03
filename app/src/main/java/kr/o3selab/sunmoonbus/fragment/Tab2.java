@@ -9,7 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 
-import kr.o3selab.sunmoonbus.constant.Constants;
+import kr.o3selab.sunmoonbus.constant.ConstantsOld;
 import kr.o3selab.sunmoonbus.model.DBManager;
 import kr.o3selab.sunmoonbus.model.TableClickListener;
 import kr.o3selab.sunmoonbus.R;
@@ -29,15 +29,15 @@ public class Tab2 extends Fragment {
 
         mType = getArguments().getInt("type");
 
-        if (mType == Constants.WEEKDAY_NOHOLIDAY)
+        if (mType == ConstantsOld.WEEKDAY_NOHOLIDAY)
             TAG = DBManager.WEEKDAY_NOHOLIDAY_CHEONAN_TERMINAL;
-        else if (mType == Constants.SATURDAY_NOHOLIDAY)
+        else if (mType == ConstantsOld.SATURDAY_NOHOLIDAY)
             TAG = DBManager.SATURDAY_NOHOLIDAY_CHEONAN_TERMINAL;
-        else if (mType == Constants.SUNDAY_NOHOLIDAY)
+        else if (mType == ConstantsOld.SUNDAY_NOHOLIDAY)
             TAG = DBManager.SUNDAY_NOHOLIDAY_CHEONAN_TERMINAL;
-        else if (mType == Constants.WEEKDAY_HOLIDAY)
+        else if (mType == ConstantsOld.WEEKDAY_HOLIDAY)
             TAG = DBManager.WEEKDAY_HOLIDAY_CHEONAN_TERMINAL;
-        else if (mType == Constants.WEEKEND_HOLIDAY)
+        else if (mType == ConstantsOld.WEEKEND_HOLIDAY)
             TAG = DBManager.WEEKEND_HOLIDAY_CHEONAN_TERMINAL;
 
         View v = inflater.inflate(R.layout.tab_2, container, false);
@@ -45,7 +45,7 @@ public class Tab2 extends Fragment {
         LinearLayout tabLayout = (LinearLayout) v.findViewById(R.id.data_table);
 
         String query = "SELECT * FROM " + TAG + ";";
-        Cursor cursor = Constants.mDBManager.execReadSQL(query);
+        Cursor cursor = ConstantsOld.mDBManager.execReadSQL(query);
 
         while (cursor.moveToNext()) {
 
