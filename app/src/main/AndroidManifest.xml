@@ -15,11 +15,10 @@
 
         <activity
             android:name="kr.o3selab.sunmoonbus.LoadingActivity"
-            android:theme="@style/AppTheme.FullScreen"
-            android:screenOrientation="portrait">
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.FullScreen">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
 
@@ -35,21 +34,19 @@
             </intent-filter>
         </activity>
 
-        <activity android:name="kr.o3selab.sunmoonbus.Activity.MainActivity" />
-        <activity android:name="kr.o3selab.sunmoonbus.Activity.SetupActivity" />
-        <activity android:name="kr.o3selab.sunmoonbus.Activity.InfoActivity" />
+        <activity android:name="kr.o3selab.sunmoonbus.activity.MainActivity" />
+        <activity android:name="kr.o3selab.sunmoonbus.activity.SetupActivity" />
+        <activity android:name="kr.o3selab.sunmoonbus.activity.InfoActivity" />
 
-        <service
-            android:name=".Services.MyFirebaseMessagingService">
+        <service android:name=".service.MyFirebaseMessagingService">
             <intent-filter>
-                <action android:name="com.google.firebase.MESSAGING_EVENT"/>
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
             </intent-filter>
         </service>
 
-        <service
-            android:name=".Services.MyFirebaseInstanceIdService">
+        <service android:name=".service.MyFirebaseInstanceIdService">
             <intent-filter>
-                <action android:name="com.google.firebase.INSTANCE_ID_EVENT"/>
+                <action android:name="com.google.firebase.INSTANCE_ID_EVENT" />
             </intent-filter>
         </service>
 

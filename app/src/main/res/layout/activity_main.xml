@@ -4,11 +4,11 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="kr.o3selab.sunmoonbus.Activity.MainActivity">
+    tools:context="kr.o3selab.sunmoonbus.activity.MainActivity">
 
     <include layout="@layout/toolbar" />
 
-    <kr.o3selab.sunmoonbus.Model.SlidingTabLayout
+    <kr.o3selab.sunmoonbus.model.SlidingTabLayout
         android:id="@+id/tabs"
         android:layout_width="match_parent"
         android:layout_height="48dp"

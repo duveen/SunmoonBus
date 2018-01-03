@@ -24,12 +24,12 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
 
-import kr.o3selab.sunmoonbus.Activity.MainActivity;
-import kr.o3selab.sunmoonbus.Constant.API;
-import kr.o3selab.sunmoonbus.Constant.Constants;
-import kr.o3selab.sunmoonbus.Constant.GetHolidayDate;
-import kr.o3selab.sunmoonbus.Constant.GetTimeTableData;
-import kr.o3selab.sunmoonbus.Model.DBManager;
+import kr.o3selab.sunmoonbus.activity.MainActivity;
+import kr.o3selab.sunmoonbus.constant.API;
+import kr.o3selab.sunmoonbus.constant.Constants;
+import kr.o3selab.sunmoonbus.constant.GetHolidayDate;
+import kr.o3selab.sunmoonbus.constant.GetTimeTableData;
+import kr.o3selab.sunmoonbus.model.DBManager;
 
 public class LoadingActivity extends AppCompatActivity {
 
